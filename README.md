@@ -23,3 +23,5 @@ uvicorn main:app --reload --host 0.0.0.0
 Get your PC's IP address from `ipconfig`. Go to <ipaddr>:8000 on your phone's browser.
 
 **Note**: Make sure that your media player is an active window.
+
+![Screenshot](/docs/screenshot.jpeg)
