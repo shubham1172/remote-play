@@ -1,0 +1,4 @@
+pyautogui
+fastapi
+uvicorn
+aiofiles
