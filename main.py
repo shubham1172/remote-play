@@ -6,8 +6,9 @@ from fastapi.responses import FileResponse
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"))
 
+
 @app.get("/{cmd}")
-def handle_toggle(cmd):
+def handle_command(cmd):
     if cmd == "mute":
         pyautogui.press("m")
     elif cmd == "toggle":
@@ -20,6 +21,15 @@ def handle_toggle(cmd):
         pyautogui.press("volumeup")
     elif cmd == "volume_down":
         pyautogui.press("volumedown")
+
+
+@app.get("/touchpad/{action}")
+def handle_touchpad(action, dx: int = 0, dy: int = 0):
+    if action == "lmb":
+        pyautogui.leftClick()
+    elif action == "move":
+        pyautogui.moveRel(dx, dy)
+
 
 @app.get("/")
 def index():

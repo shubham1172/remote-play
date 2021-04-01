@@ -3,6 +3,14 @@
     min-height: 100vh;
     flex-direction: column;
 }
+
+.touchpad {
+    background-color: black;
+    min-height: 28vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
   
 .container {
     flex: 1;
