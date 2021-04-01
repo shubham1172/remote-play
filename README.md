@@ -3,6 +3,8 @@ Remote-play uses *pyautogui* to press keyboard shortcuts to control your media. 
 
 Can be used with various players like Hotstar, Amazon Prime, Netflix, etc.
 
+Remote-play supports basic functionalities like Pause/Play, Mute, Volume control, Seeking and also comes with a touchpad with mouse cursor movement and left-mouse button support by tapping.
+
 # Using remote-play
 Clone the repository
 ```bash
