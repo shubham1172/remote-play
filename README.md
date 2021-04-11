@@ -29,7 +29,7 @@ uvicorn main:app --reload --host 0.0.0.0
 
 ### Get your computer's IP address:
 
-- Windows users: type following command in your CMD prompt
+- Windows users: type the following command in your CMD prompt
 
 ```
 ipconfig
