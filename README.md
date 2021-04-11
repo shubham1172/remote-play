@@ -35,7 +35,7 @@ uvicorn main:app --reload --host 0.0.0.0
 ipconfig
 ```
 
-- Linux/Mac users: type following command in your terminal
+- Linux/Mac users: type the following command in your terminal
 
 ```
 ifconfig
