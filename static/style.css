@@ -1,17 +1,78 @@
-.main {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
+body {
+	display: flex;
+	height: 100vh;
+	width: 90vw;
+	margin: auto;
+	flex-direction: column;
+	justify-content: center;
+	align-self: center;
+}
+
+header {
+	height: 10%;
+	width: 100%;
+	text-align: center;
+	background-color: rgb(35, 77, 141);
+	font-family: Arial, Helvetica, sans-serif;
+	color: white;
+}
+
+main {
+	height: 80%;
+}
+
+footer {
+	height: 8%;
+	text-align: center;
+	display: flex;
+}
+footer p {
+	align-self: center;
+	margin: auto;
+}
+
+footer a:hover {
+	color: brown;
+}
+
+.container {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr 1fr 4fr;
+}
+
+.play {
+	grid-column: 1 / span 2;
+}
+
+.mute {
+	grid-column: 1 / span 2;
 }
 
 .touchpad {
-    background-color: black;
-    min-height: 28vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	background-color: silver;
+	border: 1px solid lightgray;
+	grid-column: 1 / span 2;
+	color: rgb(83, 80, 80);
+	border-radius: 10px;
+	display: flex;
 }
-  
-.container {
-    flex: 1;
+
+.touchpad p {
+	text-align: center;
+	align-self: center;
+	margin: auto;
+}
+
+.button {
+	border-radius: 10px;
+	border: 2px solid lightgray;
+	font-size: large;
+	background-color: white;
+	margin: 1px;
+}
+
+.button:hover {
+	color: rgb(29, 51, 177);
+	background-color: rgb(178, 190, 226);
 }
