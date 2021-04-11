@@ -45,6 +45,8 @@ ifconfig
 
 Go to `ip_address:8000` on your phone's browser. (Replace ip_address with your computer's IP address')
 
-### **Note**: Make sure that your media player is an active window.
+### Start using Remote-Play on your phone
+
+**Note**: Make sure that your media player is an active window.
 
 ![Screenshot](/docs/screenshot.jpeg)
