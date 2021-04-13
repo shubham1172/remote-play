@@ -43,7 +43,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       # See https://stackoverflow.com/a/64642492/4654175
-      - name: MacOS fix for puautogui
+      - name: MacOS fix for pyautogui
         run: python hack/fix_pyautogui_macos.py
       - name: Run PyInstaller
         run: pyinstaller --onedir --additional-hooks-dir extra-hooks --add-data static:static --name remote-play main.py
