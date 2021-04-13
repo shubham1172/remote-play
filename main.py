@@ -55,6 +55,6 @@ if __name__ == "__main__":
         "/static", StaticFiles(directory=os.path.join(application_path, "static")))
 
     host = os.environ.get("REMOTE_PLAY_HOST", "0.0.0.0")
-    port = os.environ.get("REMOTE_PLAY_PORT", 8080)
+    port = os.environ.get("REMOTE_PLAY_PORT", 8000)
 
     uvicorn.run(app, host=host, port=port)

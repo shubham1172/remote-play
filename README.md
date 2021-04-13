@@ -19,6 +19,7 @@ Remote-Play supports basic functionalities like Pause/Play, Mute, Volume control
 
 ### Installing
 - Extract the zip from the step above and copy to any suitable location
+- Set the environment variables REMOTE_PLAY_HOST (default="0.0.0.0") and REMOTE_PLAY_PORT (default=8000) to customize the web server's host and port.
 - Open the remote-play folder and start the app - remote-play.exe for Windows, remote-play for Linux/MacOS
 
 ### Get your computer's IP address:
