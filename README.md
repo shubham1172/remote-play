@@ -8,24 +8,18 @@ Remote-Play supports basic functionalities like Pause/Play, Mute, Volume control
 
 ## Using Remote-Play
 
-### Clone the repository
+### Download the latest version
 
-```bash
-git clone https://github.com/shubham1172/remote-play.git
-cd remote-play
-```
+#### Get a public version
+- Head to [Releases](https://github.com/shubham1172/remote-play/releases) and download the right release depending on your OS
 
-### Install requirements
+#### Get a development version (unstable)
+- Head to [Package workflow](https://github.com/shubham1172/remote-play/actions/workflows/package.yml) and click on the latest run
+- Scroll down to find the `artifacts` associated and download the right one for your OS
 
-```
-pip3 install -r requirements.txt
-```
-
-### Start the web-server
-
-```
-uvicorn main:app --reload --host 0.0.0.0
-```
+### Installing
+- Extract the zip from the step above and copy to any suitable location
+- Open the remote-play folder and start the app - remote-play.exe for Windows, remote-play for Linux/MacOS
 
 ### Get your computer's IP address:
 
