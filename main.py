@@ -20,9 +20,16 @@ def handle_command(cmd):
     elif cmd == "seek_right":
         pyautogui.press("right")
     elif cmd == "volume_up":
-        pyautogui.press("volumeup")
+        # MacOS requires special control for volume
+        if sys.platform == "darwin":
+            pyautogui.press("KEYTYPE_SOUND_UP")
+        else:
+            pyautogui.press("volumeup")
     elif cmd == "volume_down":
-        pyautogui.press("volumedown")
+        if sys.platform == "darwin":
+            pyautogui.press("KEYTYPE_SOUND_DOWN")
+        else:
+            pyautogui.press("volumedown")
 
 
 @app.get("/touchpad/{action}")
