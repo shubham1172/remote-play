@@ -1,0 +1,73 @@
+name: Package
+
+on:
+  push:
+    branches: [main]
+
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Install dependencies
+        run: |
+          python 
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Run PyInstaller
+        run: pyinstaller --onedir --additional-hooks-dir .\extra-hooks --add-data static:static --name remote-play .\main.py
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: remote-play-linux
+          path: ./dist
+
+  build-macos:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Install dependencies
+        run: |
+          python 
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Run PyInstaller
+        run: pyinstaller --onedir --additional-hooks-dir .\extra-hooks --add-data static:static --name remote-play .\main.py
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: remote-play-macos
+          path: ./dist
+
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Install dependencies
+        run: |
+          python 
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Run PyInstaller
+        run: pyinstaller --onedir --additional-hooks-dir .\extra-hooks --add-data "static;static" --name remote-play .\main.py
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: remote-play-windows
+          path: ./dist

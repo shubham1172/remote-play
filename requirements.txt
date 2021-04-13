@@ -2,3 +2,4 @@ pyautogui
 fastapi
 uvicorn
 aiofiles
+PyInstaller
