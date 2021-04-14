@@ -47,7 +47,7 @@ def update_code(code, func_name, func_def):
 
 
 # Only applicable for MacOS.
-if sys.platform == "darwin":
+if __name__ == "__main__" and sys.platform == "darwin":
     fpath = os.path.join(os.path.dirname(
         pyautogui.__file__), "_pyautogui_osx.py")
     with open(fpath, 'r+') as file:
