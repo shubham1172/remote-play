@@ -1,15 +1,36 @@
+const ws = new WebSocket("ws://"+location.host+"/ws");
+let start = {
+    x: 0,
+    y: 0
+};
+
 document.addEventListener("DOMContentLoaded", function (event) {
+    document.getElementById('touchpad').addEventListener("touchstart", touchStart);
+    document.getElementById('touchpad').addEventListener("touchmove", touchMove);
+
     var hammer = new Hammer(document.getElementById('touchpad'))
-    hammer.get('pan').set({ direction: Hammer.DIRECTION_ALL });
     hammer.on('tap', function (ev) {
         // left mouse button click
-        callEndpoint('/touchpad/lmb')
-    });
-    hammer.on('pan', function (ev) {
-        // cursor control
-        callEndpoint(`/touchpad/move?dx=${ev.deltaX/2}&dy=${ev.deltaY/2}`)
+        ws.send(JSON.stringify({"type": "tap"}));
     });
 });
+
+function touchStart(ev){
+    ev.preventDefault();
+    start.x = ev.changedTouches[0].clientX;
+    start.y = ev.changedTouches[0].clientY;
+}
+
+function touchMove(ev){
+    ev.preventDefault();
+    offsetX = ev.changedTouches[0].clientX - start.x;
+    offsetY = ev.changedTouches[0].clientY - start.y;
+
+    ws.send(JSON.stringify({"type": "move", "x": offsetX*2, "y": offsetY*2}));
+    
+    start.x = ev.changedTouches[0].clientX;
+    start.y = ev.changedTouches[0].clientY;
+}
 
 function callEndpoint(endpoint) {
     var xhr = new XMLHttpRequest();

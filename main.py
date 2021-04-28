@@ -2,12 +2,30 @@ import os
 import pyautogui
 import sys
 import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI, WebSocket
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 
 app = FastAPI()
+pyautogui.FAILSAFE = False
+pyautogui.PAUSE = 0
 
+@app.websocket("/ws")
+async def websocket_endpoint(websocket: WebSocket):
+    print('Accepting client connections..')
+    await websocket.accept()
+
+    while True:
+        try:
+            data = await websocket.receive_json()
+            if data['type'] == "move":
+                pyautogui.moveRel(data['x'], data['y'])
+            elif data['type'] == "tap":
+                pyautogui.leftClick()
+        except Exception as ex:
+            print('Error: ', ex)
+            break
+    await websocket.close()
 
 @app.get("/{cmd}")
 def handle_command(cmd):
@@ -24,19 +42,9 @@ def handle_command(cmd):
     elif cmd == "volume_down":
         pyautogui.press("volumedown")
 
-
-@app.get("/touchpad/{action}")
-def handle_touchpad(action, dx: int = 0, dy: int = 0):
-    if action == "lmb":
-        pyautogui.leftClick()
-    elif action == "move":
-        pyautogui.moveRel(dx, dy)
-
-
 @app.get("/")
 def index():
     return FileResponse('static/index.html', media_type='text/html')
-
 
 if __name__ == "__main__":
 

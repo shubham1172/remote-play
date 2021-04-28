@@ -3,3 +3,4 @@ fastapi
 uvicorn
 aiofiles
 PyInstaller
+websockets
