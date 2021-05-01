@@ -2,17 +2,15 @@ import os
 import pyautogui
 import sys
 import uvicorn
-from fastapi import FastAPI, WebSocket
+from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 
 app = FastAPI()
-pyautogui.FAILSAFE = False
-pyautogui.PAUSE = 0
 
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
-    print('Accepting client connections..')
+    print('Websocket is accepting client connection..')
     await websocket.accept()
 
     while True:
@@ -22,8 +20,8 @@ async def websocket_endpoint(websocket: WebSocket):
                 pyautogui.moveRel(data['x'], data['y'])
             elif data['type'] == "tap":
                 pyautogui.leftClick()
-        except Exception as ex:
-            print('Error: ', ex)
+        except WebSocketDisconnect:
+            print("Client disconnected.")
             break
     await websocket.close()
 
@@ -47,6 +45,8 @@ def index():
     return FileResponse('static/index.html', media_type='text/html')
 
 if __name__ == "__main__":
+    pyautogui.FAILSAFE = False
+    pyautogui.PAUSE = 0
 
     # See https://stackoverflow.com/a/42615559/4654175
     if getattr(sys, 'frozen', False):
