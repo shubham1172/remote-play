@@ -1,6 +1,7 @@
-pyautogui
-fastapi
-uvicorn
 aiofiles
+fastapi
+pre-commit
+pyautogui
 PyInstaller
+uvicorn
 websockets
