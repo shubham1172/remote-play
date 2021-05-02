@@ -1,6 +1,10 @@
+"""
+Remote-play hosts a FastAPI webserver to handle incoming requests
+and translate them to mouse and keyboard actions using pyautogui.
+"""
 import os
-import pyautogui
 import sys
+import pyautogui
 import uvicorn
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.staticfiles import StaticFiles
@@ -8,8 +12,10 @@ from fastapi.responses import FileResponse
 
 app = FastAPI()
 
+
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
+    """Handle websocket connections"""
     print('Websocket is accepting client connection..')
     await websocket.accept()
 
@@ -25,8 +31,10 @@ async def websocket_endpoint(websocket: WebSocket):
             break
     await websocket.close()
 
+
 @app.get("/{cmd}")
 def handle_command(cmd):
+    """Handle keypress commands"""
     if cmd == "mute":
         pyautogui.press("m")
     elif cmd == "toggle":
@@ -40,9 +48,12 @@ def handle_command(cmd):
     elif cmd == "volume_down":
         pyautogui.press("volumedown")
 
+
 @app.get("/")
 def index():
+    """Returns the static index page on root"""
     return FileResponse('static/index.html', media_type='text/html')
+
 
 if __name__ == "__main__":
     pyautogui.FAILSAFE = False
@@ -55,7 +66,7 @@ if __name__ == "__main__":
         # path into variable _MEIPASS'.
         # Since _MEIPASS does not exists at development time,
         # pylint needs to be suppressed.
-        application_path = sys._MEIPASS  # pylint: disable=no-member
+        application_path = sys._MEIPASS  # pylint: disable=no-member,protected-access
     else:
         application_path = os.path.dirname(os.path.abspath(__file__))
 

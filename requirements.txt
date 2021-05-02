@@ -3,5 +3,6 @@ fastapi
 pre-commit
 pyautogui
 PyInstaller
+pylint
 uvicorn
 websockets
