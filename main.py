@@ -2,12 +2,28 @@ import os
 import pyautogui
 import sys
 import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 
 app = FastAPI()
 
+@app.websocket("/ws")
+async def websocket_endpoint(websocket: WebSocket):
+    print('Websocket is accepting client connection..')
+    await websocket.accept()
+
+    while True:
+        try:
+            data = await websocket.receive_json()
+            if data['type'] == "move":
+                pyautogui.moveRel(data['x'], data['y'])
+            elif data['type'] == "tap":
+                pyautogui.leftClick()
+        except WebSocketDisconnect:
+            print("Client disconnected.")
+            break
+    await websocket.close()
 
 @app.get("/{cmd}")
 def handle_command(cmd):
@@ -24,21 +40,13 @@ def handle_command(cmd):
     elif cmd == "volume_down":
         pyautogui.press("volumedown")
 
-
-@app.get("/touchpad/{action}")
-def handle_touchpad(action, dx: int = 0, dy: int = 0):
-    if action == "lmb":
-        pyautogui.leftClick()
-    elif action == "move":
-        pyautogui.moveRel(dx, dy)
-
-
 @app.get("/")
 def index():
     return FileResponse('static/index.html', media_type='text/html')
 
-
 if __name__ == "__main__":
+    pyautogui.FAILSAFE = False
+    pyautogui.PAUSE = 0
 
     # See https://stackoverflow.com/a/42615559/4654175
     if getattr(sys, 'frozen', False):
