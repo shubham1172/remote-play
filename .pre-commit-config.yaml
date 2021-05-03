@@ -25,3 +25,7 @@ repos:
     rev: 'v7.25.0'
     hooks:
     -   id: eslint
+        additional_dependencies:
+        -   eslint@7.25.0
+        -   eslint-config-airbnb@18.2.1
+        args: ['--fix']
