@@ -1,5 +1,3 @@
-const Hammer = window.hammer;
-
 const ws = new WebSocket(`ws://${window.location.host}/ws`);
 const start = { x: 0, y: 0 };
 
@@ -30,17 +28,13 @@ function touchMove(ev) {
   start.y = ev.changedTouches[0].clientY;
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', (event) => {
   document.getElementById('touchpad').addEventListener('touchstart', touchStart);
   document.getElementById('touchpad').addEventListener('touchmove', touchMove);
 
   const hammer = new Hammer(document.getElementById('touchpad'));
-  hammer.on('tap', () => {
+  hammer.on('tap', (ev) => {
     // left mouse button click
     ws.send(JSON.stringify({ type: 'tap' }));
   });
 });
-
-export default {
-  callEndpoint,
-};

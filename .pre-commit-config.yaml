@@ -17,15 +17,3 @@ repos:
         entry: python -m pylint.__main__
         language: system
         files: \.py$
--   repo: https://github.com/pre-commit/mirrors-csslint
-    rev: v1.0.5
-    hooks:
-    -   id: csslint
--   repo: https://github.com/pre-commit/mirrors-eslint
-    rev: 'v7.25.0'
-    hooks:
-    -   id: eslint
-        additional_dependencies:
-        -   eslint@7.25.0
-        -   eslint-config-airbnb@18.2.1
-        args: ['--fix']
