@@ -36,7 +36,7 @@ async def websocket_endpoint(websocket: WebSocket):
 def handle_command(cmd):
     """Handle keypress commands"""
     if cmd == "mute":
-        pyautogui.press("m")
+        pyautogui.press("volumemute")
     elif cmd == "toggle":
         pyautogui.press("space")
     elif cmd == "seek_left":
