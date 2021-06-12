@@ -4,44 +4,42 @@ Remote-Play uses _pyautogui_ to press keyboard shortcuts to control your media. 
 
 Can be used with various players like Hotstar, Amazon Prime, Netflix, etc.
 
-Remote-Play supports basic functionalities like Pause/Play, Mute, Volume control, Seeking and also comes with a touchpad with mouse cursor movement and left-mouse button support by tapping.
+## Supported actions
+
+The following actions are supported:
+- Play/Pause (Toggle)
+- Volume controls (+, -, and mute)
+- Seek controls (<< and >>)
+- Mouse cursor movement
+- Left-mouse-button click using tapping
 
 ## Using Remote-Play
 
 ### Download the latest version
 
-#### Get a public version
-- Head to [Releases](https://github.com/shubham1172/remote-play/releases) and download the right release depending on your OS
+Get the latest stable version by heading to [Releases](https://github.com/shubham1172/remote-play/releases) and download the right release depending on your OS.
 
-#### Get a development version (unstable)
-- Head to [Package workflow](https://github.com/shubham1172/remote-play/actions/workflows/package.yml) and click on the latest run
-- Scroll down to find the `artifacts` associated and download the right one for your OS
+or
 
-### Installing
+Get the development (unstable) version by heading to [Package workflow](https://github.com/shubham1172/remote-play/actions/workflows/package.yml). Click on the latest run and scroll down to find the `artifacts` associated and download the right one for your OS.
+
+### Setup and installation
+
 - Extract the zip from the step above and copy to any suitable location
-- Set the environment variables REMOTE_PLAY_HOST (default="0.0.0.0") and REMOTE_PLAY_PORT (default=8000) to customize the web server's host and port.
-- Open the remote-play folder and start the app - remote-play.exe for Windows, remote-play for Linux/MacOS
+- Set the environment variables `REMOTE_PLAY_HOST` (default="0.0.0.0") and `REMOTE_PLAY_PORT` (default=8000) to customize the web server's host and port.
 
-### Get your computer's IP address:
+### Starting up
 
-- Windows users: type the following command in your CMD prompt
+- Open the remote-play folder and start the app: remote-play.exe for Windows, remote-play for Linux/MacOS
+- Navigate to the correct IP address from the console (depending on your network) on your device.
 
-```
-ipconfig
-```
+<img src="./docs/screenshot_terminal.png" width="513" height="193" alt="Screenshot of terminal"/>
 
-- Linux/Mac users: type the following command in your terminal
 
-```
-ifconfig
-```
+**Important**: Make sure that your media player is an active window.
 
-### Connect to your phone
+<img src="./docs/screenshot_webapp.jpeg" width="270" height="585" alt="Screenshot of webapp"/>
 
-Go to `ip_address:8000` on your phone's browser. (Replace ip_address with your computer's IP address')
+## Contributing
 
-### Start using Remote-Play on your phone
-
-**Note**: Make sure that your media player is an active window.
-
-![Screenshot](/docs/screenshot.jpeg)
+All contributions to Remote-Play are welcome. Please see [CONTRIBUTING.md](/CONTRIBUTING.md) for more.
