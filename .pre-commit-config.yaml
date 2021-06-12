@@ -17,3 +17,4 @@ repos:
         entry: python -m pylint.__main__
         language: system
         files: \.py$
+        args: [--extension-pkg-whitelist=netifaces]

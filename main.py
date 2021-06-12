@@ -2,13 +2,16 @@
 Remote-play hosts a FastAPI webserver to handle incoming requests
 and translate them to mouse and keyboard actions using pyautogui.
 """
+
 import os
 import sys
+import netifaces
 import pyautogui
 import uvicorn
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
+import console
 
 app = FastAPI()
 
@@ -62,6 +65,30 @@ def index():
     return FileResponse('static/index.html', media_type='text/html')
 
 
+def get_host_ips():
+    """Get IP addresses of the host where the app is running"""
+    ip_list = []
+    for interface in netifaces.interfaces():
+        for link in netifaces.ifaddresses(interface).get(netifaces.AF_INET, {}):
+            ip_addr = link.get('addr', None)
+            # ignore loopback address
+            if ip_addr and ip_addr != '127.0.0.1':
+                ip_list.append(ip_addr)
+    return ip_list
+
+
+def log_startup_message(port_num):
+    """Log a startup message to the console"""
+    console.log("remote-play", color='c', end='')
+    console.log(" by ", end='')
+    console.log("@shubham1172", color='c', end='\n\n')
+    console.log("Start a browser on your device and")
+    console.log("connect using an IP address from below:")
+    for ip_addr in get_host_ips():
+        console.log(f"http://{ip_addr}:{port_num}", color='g')
+    console.log("\n")
+
+
 if __name__ == "__main__":
     pyautogui.FAILSAFE = False
     pyautogui.PAUSE = 0
@@ -82,5 +109,7 @@ if __name__ == "__main__":
 
     host = os.environ.get("REMOTE_PLAY_HOST", "0.0.0.0")
     port = os.environ.get("REMOTE_PLAY_PORT", 8000)
+
+    log_startup_message(port)
 
     uvicorn.run(app, host=host, port=port)
