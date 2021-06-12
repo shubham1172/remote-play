@@ -6,7 +6,7 @@ write colorful messages to STDOUT.
 
 def log(msg, *args, end='\n', color=None):
     """
-    logs msg % args to the console
+    Logs msg % args to the console.
     color can be g (green), c (cyan)
     """
     # use https://en.wikipedia.org/wiki/ANSI_escape_code#8-bit
