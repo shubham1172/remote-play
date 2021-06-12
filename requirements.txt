@@ -3,7 +3,7 @@ fastapi
 netifaces
 pre-commit
 pyautogui
-PyInstaller
+PyInstaller==4.2
 pylint
 uvicorn
 websockets
