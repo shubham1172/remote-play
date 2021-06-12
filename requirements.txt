@@ -1,5 +1,6 @@
 aiofiles
 fastapi
+netifaces
 pre-commit
 pyautogui
 PyInstaller
