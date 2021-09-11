@@ -1,4 +1,9 @@
-pyautogui
-fastapi
-uvicorn
 aiofiles
+fastapi
+netifaces
+pre-commit
+pyautogui
+PyInstaller==4.2
+pylint
+uvicorn
+websockets
