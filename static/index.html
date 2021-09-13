@@ -1,55 +1,56 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Remote Play</title>
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <link rel="stylesheet" href="/static/style.css" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"
+      integrity="sha512-UXumZrZNiOwnTcZSHLOfcTs0aos2MzBWHXOHOuB0J/R44QB0dwY5JgfbvljXcklVf65Gc4El6RjZ+lnwd2az2g=="
+      crossorigin="anonymous"
+    ></script>
+    <script type="text/javascript" src="/static/index.js"></script>
+  </head>
 
-<head>
-  <meta charset='utf-8'>
-  <title>Remote Play</title>
-  <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
-  <link rel="stylesheet" href="static/style.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"
-    integrity="sha512-UXumZrZNiOwnTcZSHLOfcTs0aos2MzBWHXOHOuB0J/R44QB0dwY5JgfbvljXcklVf65Gc4El6RjZ+lnwd2az2g=="
-    crossorigin="anonymous"></script>
-  <script type="text/javascript" src="static/index.js"></script>
-</head>
-
-<body class="main">
-  <div class="container">
-    <section class="hero is-small is-link">
-      <div class="hero-body">
-        <p class="title">
-          Remote play
+  <body>
+    <header>
+      <h1 class="title">Remote Play</h1>
+    </header>
+    <main class="container">
+      <button onclick="callEndpoint('/toggle')" class="button full-width">
+        Play/Pause
+      </button>
+      <button onclick="callEndpoint('/mute')" class="button full-width">
+        Mute
+      </button>
+      <button onclick="callEndpoint('/volume_down')" class="button volume_down">
+        Volume -
+      </button>
+      <button onclick="callEndpoint('/volume_up')" class="button volume_up">
+        Volume +
+      </button>
+      <button onclick="callEndpoint('/seek_left')" class="button back">
+        &lt;&lt;
+      </button>
+      <button onclick="callEndpoint('/seek_right')" class="button forward">
+        &gt;&gt;
+      </button>
+      <div class="touchpad" id="touchpad">
+        <p>
+          Use this area as a touchpad.<br />Supported gestures:<br />track and
+          tap (Left Mouse Button).
         </p>
       </div>
-    </section>
-    <button onclick="callEndpoint('/toggle')" class="button is-large is-fullwidth">Play/Pause</button>
-    <button onclick="callEndpoint('/mute')" class="button is-large is-fullwidth">Mute</button>
-    <div class="columns is-mobile is-gapless is-multiline">
-      <div class="column is-half">
-        <button onclick="callEndpoint('/volume_down')" class="button is-large is-fullwidth">Volume -</button>
-      </div>
-      <div class="column is-half">
-        <button onclick="callEndpoint('/volume_up')" class="button is-large is-fullwidth">Volume +</button>
-      </div>
-      <div class="column is-half">
-        <button onclick="callEndpoint('/seek_left')" class="button is-large is-fullwidth">&lt;&lt;</button>
-      </div>
-      <div class="column is-half">
-        <button onclick="callEndpoint('/seek_right')" class="button is-large is-fullwidth">&gt;&gt;</button>
-      </div>
-      <div class="column if-full touchpad" id="touchpad">
-        touchpad
-      </div>
-    </div>
-  </div>
-  <footer class="footer">
-    <div class="content has-text-centered">
+    </main>
+    <footer class="footer">
       <p>
-        Have issues/suggestions or want to contribute? Head to <a
-          href="https://github.com/shubham1172/remote-play">remote-play</a>.
+        Have issues/suggestions or want to contribute?<br />Head to
+        <a href="https://github.com/shubham1172/remote-play">remote-play</a>.
       </p>
-    </div>
-  </footer>
-</body>
-
+    </footer>
+  </body>
 </html>

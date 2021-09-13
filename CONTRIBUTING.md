@@ -7,6 +7,7 @@ Thank you for your interest in contributing to Remote-Play! From commenting on a
 Find an issue to work on at [Issues](https://github.com/shubham1172/remote-play/issues). Make sure that it's not being worked on by someone else. If there is something else you want to fix/improve, please create a new issue first.
 
 Clone the repository and setup
+
 ```
 git clone https://github.com/shubham1172/remote-play
 cd remote-play
@@ -15,6 +16,7 @@ pre-commit install
 ```
 
 Create your branch
+
 ```
 git checkout -b your_username/fix_name
 ```
@@ -26,3 +28,11 @@ Make the changes, test them locally, and them commit. Make sure to comply with t
 ```
 python main.py
 ```
+
+## Converting SCSS to CSS
+
+1. Install [Live Sass Compiler](https://marketplace.visualstudio.com/items?itemName=ritwickdey.live-sass) (Or an equivalent Sass Pre-compiler)
+2. Click on the `Watch Sass` button in the lower right of your code editor while in the project directory.
+3. The `.scss` file will compile into `.css` while the compiler is watching for any file changes.
+
+**To learn more about Sass, [click here](https://sass-lang.com/)**
