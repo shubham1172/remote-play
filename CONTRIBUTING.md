@@ -31,7 +31,7 @@ python main.py
 
 ## Converting SCSS to CSS
 
-1. Install [Live Sass Compiler](https://marketplace.visualstudio.com/items?itemName=ritwickdey.live-sass) (Or an equivelant Sass Pre-compiler)
+1. Install [Live Sass Compiler](https://marketplace.visualstudio.com/items?itemName=ritwickdey.live-sass) (Or an equivalent Sass Pre-compiler)
 2. Click on the `Watch Sass` button in the lower right of your code editor while in the project directory.
 3. The `.scss` file will compile into `.css` while the compiler is watching for any file changes.
 
