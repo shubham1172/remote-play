@@ -37,4 +37,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // left mouse button click
     ws.send(JSON.stringify({ type: 'tap' }));
   });
+
+  hammer.on('double tap', (ev) => {
+    // right mouse button click
+    ws.send(JSON.stringify({ type: 'double tap' }));
+  });
+  
 });
