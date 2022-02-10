@@ -37,5 +37,4 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // left mouse button click
     ws.send(JSON.stringify({ type: 'tap' }));
   });
-  
 });
