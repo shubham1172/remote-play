@@ -29,6 +29,8 @@ async def websocket_endpoint(websocket: WebSocket):
                 pyautogui.moveRel(data['x'], data['y'])
             elif data['type'] == "tap":
                 pyautogui.leftClick()
+            elif data['type'] == "doubletap":
+                pyautogui.rightClick()
         except WebSocketDisconnect:
             print("Client disconnected.")
             break
