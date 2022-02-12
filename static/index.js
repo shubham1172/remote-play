@@ -1,5 +1,5 @@
 const ws = new WebSocket(`ws://${window.location.host}/ws`);
-const start = {x: 0, y: 0};
+const start = { x: 0, y: 0 };
 
 function callEndpoint(endpoint) {
   const xhr = new XMLHttpRequest();
@@ -22,7 +22,7 @@ function touchMove(ev) {
   const offsetX = ev.changedTouches[0].clientX - start.x;
   const offsetY = ev.changedTouches[0].clientY - start.y;
 
-  ws.send(JSON.stringify({type: "move", x: offsetX * 2, y: offsetY * 2}));
+  ws.send(JSON.stringify({ type: "move", x: offsetX * 2, y: offsetY * 2 }));
 
   start.x = ev.changedTouches[0].clientX;
   start.y = ev.changedTouches[0].clientY;
@@ -33,32 +33,25 @@ document.addEventListener("DOMContentLoaded", event => {
     .getElementById("touchpad")
     .addEventListener("touchstart", touchStart);
   document.getElementById("touchpad").addEventListener("touchmove", touchMove);
-  var Tap = new Hammer.Tap({
+  var singleTap = new Hammer.Tap({
     event: "tap",
     taps: 1
   });
-  var DoubleTap = new Hammer.Tap({
+  var doubleTap = new Hammer.Tap({
     event: "doubletap",
     taps: 2
   });
   const hammer = new Hammer.Manager(document.getElementById("touchpad"));
-
-
-  var singleTap = new Hammer.Tap({ event: 'tap' });
-  var doubleTap = new Hammer.Tap({event: 'doubletap', taps: 2 });
-
   hammer.add([doubleTap, singleTap]);
   doubleTap.recognizeWith(singleTap);
-
   doubleTap.requireFailure(singleTap);
   singleTap.requireFailure(doubleTap);
-
   hammer.on("tap", ev => {
     // left mouse button click
-    ws.send(JSON.stringify({type: "tap"}));
+    ws.send(JSON.stringify({ type: "tap" }));
   });
   hammer.on("doubletap", ev => {
-    // left mouse button click
-    ws.send(JSON.stringify({type: "doubletap"}));
+    // right mouse button click
+    ws.send(JSON.stringify({ type: "doubletap" }));
   });
 });
