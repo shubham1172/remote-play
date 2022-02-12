@@ -12,6 +12,7 @@ The following actions are supported:
 - Seek controls (<< and >>)
 - Mouse cursor movement
 - Left-mouse-button click using tapping
+- Right-mouse-button click using double tap
 
 ## Using Remote-Play
 
