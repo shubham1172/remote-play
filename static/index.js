@@ -29,9 +29,7 @@ function touchMove(ev) {
 }
 
 document.addEventListener("DOMContentLoaded", event => {
-  document
-    .getElementById("touchpad")
-    .addEventListener("touchstart", touchStart);
+  document.getElementById("touchpad").addEventListener("touchstart", touchStart);
   document.getElementById("touchpad").addEventListener("touchmove", touchMove);
   var singleTap = new Hammer.Tap({
     event: "tap",
