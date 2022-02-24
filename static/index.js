@@ -70,4 +70,4 @@ document.addEventListener("DOMContentLoaded", event => {
   doubleTap.recognizeWith(singleTap);
   doubleTap.requireFailure(singleTap);
   singleTap.requireFailure(doubleTap);
-  scrolly.requireFailulre(scrollx);
+  scrolly.requireFailure(scrollx);
