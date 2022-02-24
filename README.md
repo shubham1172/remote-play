@@ -13,6 +13,7 @@ The following actions are supported:
 - Mouse cursor movement
 - Left-mouse-button click using tapping
 - Right-mouse-button click using double tap
+- Scrolling feature using two fingers
 
 ## Using Remote-Play
 
@@ -39,7 +40,7 @@ Get the development (unstable) version by heading to [Package workflow](https://
 
 **Important**: Make sure that your media player is an active window.
 
-<img src="./docs/screenshot_webapp.jpeg" alt="Screenshot of webapp"/>
+<img src="./docs/screenshot_webapp.jpg" alt="Screenshot of webapp"/>
 
 ## Contributing
 

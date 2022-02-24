@@ -39,11 +39,18 @@ document.addEventListener("DOMContentLoaded", event => {
     event: "doubletap",
     taps: 2
   });
+  var scrollx = new Hammer.Pan({
+    event: "panx",
+    pointers: 2,
+    direction: Hammer.DIRECTION_HORIZONTAL
+  });
+  var scrolly = new Hammer.Pan({
+    event: "pany",
+    pointers: 2,
+    direction: Hammer.DIRECTION_VERTICAL
+  });
   const hammer = new Hammer.Manager(document.getElementById("touchpad"));
-  hammer.add([doubleTap, singleTap]);
-  doubleTap.recognizeWith(singleTap);
-  doubleTap.requireFailure(singleTap);
-  singleTap.requireFailure(doubleTap);
+  hammer.add([doubleTap, singleTap, scroll]);
   hammer.on("tap", ev => {
     // left mouse button click
     ws.send(JSON.stringify({ type: "tap" }));
@@ -52,4 +59,15 @@ document.addEventListener("DOMContentLoaded", event => {
     // right mouse button click
     ws.send(JSON.stringify({ type: "doubletap" }));
   });
-});
+  hammer.on("scrollx", ev => {
+    // scroll
+    ws.send(JSON.stringify({ type: "scroll" }));
+  });
+  hammer.on("scrolly", ev => {
+    // scroll
+    ws.send(JSON.stringify({ type: "scroll" }));
+  });
+  doubleTap.recognizeWith(singleTap);
+  doubleTap.requireFailure(singleTap);
+  singleTap.requireFailure(doubleTap);
+  scrolly.requireFailulre(scrollx);
