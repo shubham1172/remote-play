@@ -87,12 +87,22 @@ footer a:hover {
   grid-column: 1 / span 2;
 }
 
-.touchpad {
-  background-color: silver;
-  border: 1px solid lightgray;
+#wrapper {
   -ms-grid-column: 1;
   -ms-grid-column-span: 2;
   grid-column: 1 / span 2;
+  color: #535050;
+  border-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.touchpad {
+  background-color: silver;
+  border: 1px solid lightgray;
+  float: left;
+  width: 95%;
   color: #535050;
   border-radius: 10px;
   display: -webkit-box;
@@ -111,9 +121,10 @@ footer a:hover {
 
 .vscrollpad {
   background-color: silver;
+  margin-right: auto;
   border: 1px solid lightgray;
   color: #535050;
-  width: 125px;
+  width: 5%;
   border-radius: 10px;
   display: -webkit-box;
   display: -ms-flexbox;
