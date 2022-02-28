@@ -82,19 +82,19 @@ document.addEventListener("DOMContentLoaded", event => {
   vscrollHammer.add([scrollyup,scrollydown]);
   hscrollHammer.add([scrollxright, scrollxleft]);
   vscrollHammer.on("vscrollup", ev => { 
-    // scroll
+    // scroll up
     ws.send(JSON.stringify({ type: "scrollyup"}));
   });
   vscrollHammer.on("vscrolldown", ev => {
-    // scroll
+    // scroll down
     ws.send(JSON.stringify({ type: "scrollydown"}));
   });
   hscrollHammer.on("hscrollright", ev => {
-    // scroll
+    // scroll right 
     ws.send(JSON.stringify({ type: "scrollxright" }));
   });
   hscrollHammer.on("hscrollleft", ev => {
-    // scroll
+    // scroll left
     ws.send(JSON.stringify({ type: "scrollxleft" }));
   });
 });
