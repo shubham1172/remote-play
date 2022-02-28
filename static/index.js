@@ -31,6 +31,9 @@ function touchMove(ev) {
 document.addEventListener("DOMContentLoaded", event => {
   document.getElementById("touchpad").addEventListener("touchstart", touchStart);
   document.getElementById("touchpad").addEventListener("touchmove", touchMove);
+  const hammer = new Hammer.Manager(document.getElementById("touchpad"));
+  const vscrollHammer = new Hammer.Manager(document.getElementById("vscrollpad"));
+  const hscrollHammer = new Hammer.Manager(document.getElementById("hscrollpad"));
   var singleTap = new Hammer.Tap({
     event: "tap",
     taps: 1
@@ -40,17 +43,16 @@ document.addEventListener("DOMContentLoaded", event => {
     taps: 2
   });
   var scrollx = new Hammer.Pan({
-    event: "panx",
-    pointers: 2,
+    event: "hscroll",
+    pointers: 1,
     direction: Hammer.DIRECTION_HORIZONTAL
   });
   var scrolly = new Hammer.Pan({
-    event: "pany",
-    pointers: 2,
+    event: "vscroll",
+    pointers: 1,
     direction: Hammer.DIRECTION_VERTICAL
   });
-  const hammer = new Hammer.Manager(document.getElementById("touchpad"));
-  hammer.add([doubleTap, singleTap, scroll]);
+  hammer.add([doubleTap, singleTap]);
   hammer.on("tap", ev => {
     // left mouse button click
     ws.send(JSON.stringify({ type: "tap" }));
@@ -59,15 +61,19 @@ document.addEventListener("DOMContentLoaded", event => {
     // right mouse button click
     ws.send(JSON.stringify({ type: "doubletap" }));
   });
-  hammer.on("scrollx", ev => {
-    // scroll
-    ws.send(JSON.stringify({ type: "scroll" }));
-  });
-  hammer.on("scrolly", ev => {
-    // scroll
-    ws.send(JSON.stringify({ type: "scroll" }));
-  });
   doubleTap.recognizeWith(singleTap);
   doubleTap.requireFailure(singleTap);
   singleTap.requireFailure(doubleTap);
-  scrolly.requireFailure(scrollx);
+
+  hscrollHammer.add(scrollx);
+  vscrollHammer.add(scrolly);
+
+  hscrollHammer.on("scrollx", ev => {
+    // scroll
+    ws.send(JSON.stringify({ type: "scroll" }));
+  });
+  vscrollHammer.on("scrolly", ev => {
+    // scroll
+    ws.send(JSON.stringify({ type: "scroll" }));
+  });
+});

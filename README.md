@@ -13,7 +13,7 @@ The following actions are supported:
 - Mouse cursor movement
 - Left-mouse-button click using tapping
 - Right-mouse-button click using double tap
-- Scrolling feature using two fingers
+- Horizontal and Vertical scrolling in respective areas
 
 ## Using Remote-Play
 

@@ -109,6 +109,48 @@ footer a:hover {
   margin: auto;
 }
 
+.vscrollpad {
+  background-color: silver;
+  border: 1px solid lightgray;
+  color: #535050;
+  width: 125px;
+  border-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.vscrollpad p {
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  margin: auto;
+}
+
+.hscrollpad {
+  background-color: silver;
+  border: 1px solid lightgray;
+  color: #535050;
+  border-radius: 10px;
+  height: 50px;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-column: 1 / span 2;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.hscrollpad p {
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  margin: auto;
+}
 .button {
   border-radius: 10px;
   border: 2px solid lightgray;
