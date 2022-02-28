@@ -104,7 +104,7 @@ footer a:hover {
   float: left;
   width: 82%;
   color: #535050;
-  border-radius: 10px;
+  border-top-left-radius: 10px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -125,7 +125,7 @@ footer a:hover {
   border: 1px solid lightgray;
   color: #535050;
   width: 18%;
-  border-radius: 10px;
+  border-top-right-radius: 10px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -144,7 +144,8 @@ footer a:hover {
   background-color: silver;
   border: 1px solid lightgray;
   color: #535050;
-  border-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
   height: 50px;
   -ms-grid-column: 1;
   -ms-grid-column-span: 2;

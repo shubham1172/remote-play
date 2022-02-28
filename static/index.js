@@ -34,6 +34,7 @@ document.addEventListener("DOMContentLoaded", event => {
   const hammer = new Hammer.Manager(document.getElementById("touchpad"));
   const vscrollHammer = new Hammer.Manager(document.getElementById("vscrollpad"));
   const hscrollHammer = new Hammer.Manager(document.getElementById("hscrollpad"));
+
   var singleTap = new Hammer.Tap({
     event: "tap",
     taps: 1
@@ -42,38 +43,58 @@ document.addEventListener("DOMContentLoaded", event => {
     event: "doubletap",
     taps: 2
   });
-  var scrollx = new Hammer.Pan({
-    event: "hscroll",
-    pointers: 1,
-    direction: Hammer.DIRECTION_HORIZONTAL
-  });
-  var scrolly = new Hammer.Pan({
-    event: "vscroll",
-    pointers: 1,
-    direction: Hammer.DIRECTION_VERTICAL
-  });
+
   hammer.add([doubleTap, singleTap]);
   hammer.on("tap", ev => {
     // left mouse button click
     ws.send(JSON.stringify({ type: "tap" }));
   });
   hammer.on("doubletap", ev => {
-    // right mouse button click
+    // right mouse button click 
     ws.send(JSON.stringify({ type: "doubletap" }));
   });
   doubleTap.recognizeWith(singleTap);
   doubleTap.requireFailure(singleTap);
   singleTap.requireFailure(doubleTap);
 
-  hscrollHammer.add(scrollx);
-  vscrollHammer.add(scrolly);
-
-  hscrollHammer.on("scrollx", ev => {
-    // scroll
-    ws.send(JSON.stringify({ type: "scroll" }));
+  var scrollyup = new Hammer.Pan({
+    event: "vscrollup",
+    threshhold: 50,
+    direction: Hammer.DIRECTION_UP
   });
-  vscrollHammer.on("scrolly", ev => {
+  var scrollydown = new Hammer.Pan({
+    event: "vscrolldown",
+    threshhold: 50,
+    direction: Hammer.DIRECTION_DOWN
+  });
+  var scrollxright= new Hammer.Pan({
+    event: "hscrollright",
+    threshhold: 50,
+    direction: Hammer.DIRECTION_RIGHT
+  });
+  var scrollxleft = new Hammer.Pan({
+    event: "hscrollleft",
+    threshhold: 50,
+    direction: Hammer.DIRECTION_LEFT
+  });
+
+
+  vscrollHammer.add([scrollyup,scrollydown]);
+  hscrollHammer.add([scrollxright, scrollxleft]);
+  vscrollHammer.on("vscrollup", ev => { 
     // scroll
-    ws.send(JSON.stringify({ type: "scroll" }));
+    ws.send(JSON.stringify({ type: "scrollyup"}));
+  });
+  vscrollHammer.on("vscrolldown", ev => {
+    // scroll
+    ws.send(JSON.stringify({ type: "scrollydown"}));
+  });
+  hscrollHammer.on("hscrollright", ev => {
+    // scroll
+    ws.send(JSON.stringify({ type: "scrollxright" }));
+  });
+  hscrollHammer.on("hscrollleft", ev => {
+    // scroll
+    ws.send(JSON.stringify({ type: "scrollxleft" }));
   });
 });
