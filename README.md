@@ -13,7 +13,8 @@ The following actions are supported:
 - Mouse cursor movement
 - Left-mouse-button click using tapping
 - Right-mouse-button click using double tap
-- Horizontal and Vertical scrolling in respective areas
+- Swipe up and down to scroll vertically on the right pad
+- Swipe left and right to scroll horizontally on the bottom pad
 
 ## Using Remote-Play
 
