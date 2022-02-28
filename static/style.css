@@ -102,7 +102,7 @@ footer a:hover {
   background-color: silver;
   border: 1px solid lightgray;
   float: left;
-  width: 95%;
+  width: 82%;
   color: #535050;
   border-radius: 10px;
   display: -webkit-box;
@@ -124,7 +124,7 @@ footer a:hover {
   margin-right: auto;
   border: 1px solid lightgray;
   color: #535050;
-  width: 5%;
+  width: 18%;
   border-radius: 10px;
   display: -webkit-box;
   display: -ms-flexbox;
