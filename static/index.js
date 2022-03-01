@@ -72,21 +72,21 @@ document.addEventListener("DOMContentLoaded", event => {
   hscrollHammer.add(scrollx);
 
   vscrollHammer.on("vscroll", ev => { 
-    // scroll up
-    if (ev.direction == 8){
+    // scroll vertically
+    if (ev.direction == 8){ // direction = up
       ws.send(JSON.stringify({ type: "scrolly", y: "up"}));
     }
-    if (ev.direction == 16){
+    if (ev.direction == 16){ // direction = down
       ws.send(JSON.stringify({ type: "scrolly", y: "down"}));
     }
   });
-  
+
   hscrollHammer.on("hscroll", ev => {
-    // scroll right 
-    if (ev.direction == 2){
+    // scroll horizontally
+    if (ev.direction == 2){ //direction = left
       ws.send(JSON.stringify({ type: "scrollx", x: "left"}));
     }
-    if (ev.direction == 4){
+    if (ev.direction == 4){ // direction = right
       ws.send(JSON.stringify({ type: "scrollx", x: "right"}));
     }
   });
