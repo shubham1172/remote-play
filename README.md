@@ -14,7 +14,9 @@ The following actions are supported:
 - Left-mouse-button click using tapping
 - Right-mouse-button click using double tap
 - Swipe up and down to scroll vertically on the right pad
-- Swipe left and right to scroll horizontally on the bottom pad
+
+**Disclaimer**: Horizontal scrolling only supported on OS X / Linux Platforms
+- Swipe left and right to scroll horizontally on the bottom pad 
 
 ## Using Remote-Play
 

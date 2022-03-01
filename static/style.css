@@ -110,15 +110,6 @@ footer a:hover {
   display: flex;
 }
 
-/* .touchpad p {
-  font-family: Arial, Helvetica, sans-serif;
-  text-align: center;
-  -ms-flex-item-align: center;
-      -ms-grid-row-align: center;
-      align-self: center;
-  margin: auto;
-} */
-
 .vscrollpad {
   background-color: silver;
   margin-right: auto;
@@ -130,15 +121,6 @@ footer a:hover {
   display: -ms-flexbox;
   display: flex;
 }
-
-/* .vscrollpad p {
-  font-family: Arial, Helvetica, sans-serif;
-  text-align: center;
-  -ms-flex-item-align: center;
-      -ms-grid-row-align: center;
-      align-self: center;
-  margin: auto;
-} */
 
 .hscrollpad {
   background-color: silver;
@@ -154,15 +136,6 @@ footer a:hover {
   display: -ms-flexbox;
   display: flex;
 }
-
-/* .hscrollpad p {
-  font-family: Arial, Helvetica, sans-serif;
-  text-align: center;
-  -ms-flex-item-align: center;
-      -ms-grid-row-align: center;
-      align-self: center;
-  margin: auto;
-} */
 
 .button {
   border-radius: 10px;
