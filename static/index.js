@@ -31,6 +31,10 @@ function touchMove(ev) {
 document.addEventListener("DOMContentLoaded", event => {
   document.getElementById("touchpad").addEventListener("touchstart", touchStart);
   document.getElementById("touchpad").addEventListener("touchmove", touchMove);
+  const hammer = new Hammer.Manager(document.getElementById("touchpad"));
+  const vscrollHammer = new Hammer.Manager(document.getElementById("vscrollpad"));
+  const hscrollHammer = new Hammer.Manager(document.getElementById("hscrollpad"));
+
   var singleTap = new Hammer.Tap({
     event: "tap",
     taps: 1
@@ -39,17 +43,52 @@ document.addEventListener("DOMContentLoaded", event => {
     event: "doubletap",
     taps: 2
   });
-  const hammer = new Hammer.Manager(document.getElementById("touchpad"));
+
   hammer.add([doubleTap, singleTap]);
-  doubleTap.recognizeWith(singleTap);
-  doubleTap.requireFailure(singleTap);
-  singleTap.requireFailure(doubleTap);
   hammer.on("tap", ev => {
     // left mouse button click
     ws.send(JSON.stringify({ type: "tap" }));
   });
   hammer.on("doubletap", ev => {
-    // right mouse button click
+    // right mouse button click 
     ws.send(JSON.stringify({ type: "doubletap" }));
   });
+  doubleTap.recognizeWith(singleTap);
+  doubleTap.requireFailure(singleTap);
+  singleTap.requireFailure(doubleTap);
+
+  var scrolly = new Hammer.Pan({
+    event: "vscroll",
+    threshhold: 50,
+    direction: Hammer.DIRECTION_VERTICAL
+  });
+  var scrollx = new Hammer.Pan({
+    event: "hscroll",
+    threshhold: 50,
+    direction: Hammer.DIRECTION_HORIZONTAL
+  });
+
+  vscrollHammer.add(scrolly);
+  hscrollHammer.add(scrollx);
+
+  vscrollHammer.on("vscroll", ev => { 
+    // scroll vertically
+    if (ev.direction == 8){ // direction = up
+      ws.send(JSON.stringify({ type: "scrolly", y: "up"}));
+    }
+    if (ev.direction == 16){ // direction = down
+      ws.send(JSON.stringify({ type: "scrolly", y: "down"}));
+    }
+  });
+
+  hscrollHammer.on("hscroll", ev => {
+    // scroll horizontally
+    if (ev.direction == 2){ //direction = left
+      ws.send(JSON.stringify({ type: "scrollx", x: "left"}));
+    }
+    if (ev.direction == 4){ // direction = right
+      ws.send(JSON.stringify({ type: "scrollx", x: "right"}));
+    }
+  });
+
 });

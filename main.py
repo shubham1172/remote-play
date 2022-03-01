@@ -31,6 +31,16 @@ async def websocket_endpoint(websocket: WebSocket):
                 pyautogui.leftClick()
             elif data['type'] == "doubletap":
                 pyautogui.rightClick()
+            elif data['type'] == "scrolly":
+                if data['y'] == "up":
+                    pyautogui.scroll(-15)
+                elif data['y'] == "down":
+                    pyautogui.scroll(15)
+            elif data['type'] == "scrollx":
+                if data['x'] == "left":
+                    pyautogui.hscroll(15)
+                elif data['x'] == "right":
+                    pyautogui.hscroll(-15)
         except WebSocketDisconnect:
             print("Client disconnected.")
             break

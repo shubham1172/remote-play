@@ -87,9 +87,7 @@ footer a:hover {
   grid-column: 1 / span 2;
 }
 
-.touchpad {
-  background-color: silver;
-  border: 1px solid lightgray;
+#wrapper {
   -ms-grid-column: 1;
   -ms-grid-column-span: 2;
   grid-column: 1 / span 2;
@@ -100,13 +98,43 @@ footer a:hover {
   display: flex;
 }
 
-.touchpad p {
-  font-family: Arial, Helvetica, sans-serif;
-  text-align: center;
-  -ms-flex-item-align: center;
-      -ms-grid-row-align: center;
-      align-self: center;
-  margin: auto;
+.touchpad {
+  background-color: silver;
+  border: 1px solid lightgray;
+  float: left;
+  width: 82%;
+  color: #535050;
+  border-top-left-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.vscrollpad {
+  background-color: silver;
+  margin-right: auto;
+  border: 1px solid lightgray;
+  color: #535050;
+  width: 18%;
+  border-top-right-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.hscrollpad {
+  background-color: silver;
+  border: 1px solid lightgray;
+  color: #535050;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  height: 50px;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-column: 1 / span 2;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .button {
