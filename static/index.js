@@ -57,44 +57,38 @@ document.addEventListener("DOMContentLoaded", event => {
   doubleTap.requireFailure(singleTap);
   singleTap.requireFailure(doubleTap);
 
-  var scrollyup = new Hammer.Pan({
-    event: "vscrollup",
+  var scrolly = new Hammer.Pan({
+    event: "vscroll",
     threshhold: 50,
-    direction: Hammer.DIRECTION_UP
+    direction: Hammer.DIRECTION_VERTICAL
   });
-  var scrollydown = new Hammer.Pan({
-    event: "vscrolldown",
+  var scrollx = new Hammer.Pan({
+    event: "hscroll",
     threshhold: 50,
-    direction: Hammer.DIRECTION_DOWN
-  });
-  var scrollxright= new Hammer.Pan({
-    event: "hscrollright",
-    threshhold: 50,
-    direction: Hammer.DIRECTION_RIGHT
-  });
-  var scrollxleft = new Hammer.Pan({
-    event: "hscrollleft",
-    threshhold: 50,
-    direction: Hammer.DIRECTION_LEFT
+    direction: Hammer.DIRECTION_HORIZONTAL
   });
 
+  vscrollHammer.add(scrolly);
+  hscrollHammer.add(scrollx);
 
-  vscrollHammer.add([scrollyup,scrollydown]);
-  hscrollHammer.add([scrollxright, scrollxleft]);
-  vscrollHammer.on("vscrollup", ev => { 
+  vscrollHammer.on("vscroll", ev => { 
     // scroll up
-    ws.send(JSON.stringify({ type: "scrollyup"}));
+    if (ev.direction == 8){
+      ws.send(JSON.stringify({ type: "scrolly", y: "up"}));
+    }
+    if (ev.direction == 16){
+      ws.send(JSON.stringify({ type: "scrolly", y: "down"}));
+    }
   });
-  vscrollHammer.on("vscrolldown", ev => {
-    // scroll down
-    ws.send(JSON.stringify({ type: "scrollydown"}));
-  });
-  hscrollHammer.on("hscrollright", ev => {
+  
+  hscrollHammer.on("hscroll", ev => {
     // scroll right 
-    ws.send(JSON.stringify({ type: "scrollxright" }));
+    if (ev.direction == 2){
+      ws.send(JSON.stringify({ type: "scrollx", x: "left"}));
+    }
+    if (ev.direction == 4){
+      ws.send(JSON.stringify({ type: "scrollx", x: "right"}));
+    }
   });
-  hscrollHammer.on("hscrollleft", ev => {
-    // scroll left
-    ws.send(JSON.stringify({ type: "scrollxleft" }));
-  });
+
 });
