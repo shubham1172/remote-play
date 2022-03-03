@@ -91,4 +91,52 @@ document.addEventListener("DOMContentLoaded", event => {
     }
   });
 
+  var darkSwitch = document.querySelector('input[name=darkMode]');
+  const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+  const prefersLightScheme = window.matchMedia("(prefers-color-scheme: light)");
+
+  darkSwitch.addEventListener('change', function (event) {
+    // toggles darkmode when user taps switch
+    if (localStorage.getItem("darkModelocal") == "dark") {
+      document.documentElement.classList.toggle("dark");
+      localStorage.setItem("darkModelocal", "light");
+    }
+    else if(localStorage.getItem("darkModelocal") == "light"){
+      document.documentElement.classList.toggle("dark");
+      localStorage.setItem("darkModelocal", "dark");
+    }
+  });
+
+  // checks if switch state, darkmode, and local storage preference matches
+  if (localStorage.getItem("darkModelocal") == "light" && prefersDarkScheme.matches){
+    localStorage.setItem("darkModelocal", "light");
+    document.getElementById("darkMode").checked = false;
+  }
+  else if (localStorage.getItem("darkModelocal") == "dark" && prefersDarkScheme.matches){
+    document.documentElement.classList.toggle("dark");
+    document.getElementById("darkMode").checked = true;
+  }
+  else if (localStorage.getItem("darkModelocal") == "light" && prefersLightScheme.matches) {
+    document.documentElement.classList.add("dark");
+    document.documentElement.classList.toggle("dark");
+    document.getElementById("darkMode").checked = false;
+  }
+  else if (localStorage.getItem("darkModelocal") == "dark" && prefersLightScheme.matches){
+    localStorage.setItem("darkModelocal", "dark");
+    document.documentElement.classList.add("dark");
+    document.getElementById("darkMode").checked = true;
+  }
+
+  // if first time, default to user's system preference
+  else if (prefersDarkScheme.matches) {
+    localStorage.setItem("darkModelocal", "dark");
+    document.documentElement.classList.add("dark");
+    document.getElementById("darkMode").checked = true;
+  }
+  else if(prefersLightScheme) {
+    localStorage.setItem("darkModelocal", "light");
+    document.documentElement.classList.add("dark");
+    document.documentElement.classList.toggle("dark");
+    document.getElementById("darkMode").checked = false;
+  }
 });
