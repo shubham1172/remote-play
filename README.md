@@ -43,7 +43,8 @@ Get the development (unstable) version by heading to [Package workflow](https://
 
 **Important**: Make sure that your media player is an active window.
 
-<img src="./docs/screenshot_webapp.jpg" width="270" height="512" alt="Screenshot of webapp"/>
+<img src="./docs/screenshot_webapp.PNG" width="270" height="512" alt="Screenshot of webapp"/>
+<img src="./docs/screenshot_darkmode_webapp.PNG" width="270" height="512" alt="Screenshot of darkmode webapp"/>
 
 ## Contributing
 
