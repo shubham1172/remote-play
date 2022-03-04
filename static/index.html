@@ -14,11 +14,25 @@
       crossorigin="anonymous"
     ></script>
     <script type="text/javascript" src="/static/index.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
 
   <body>
     <header>
       <h1 class="title">Remote Play</h1>
+      <div id ="switchwrap">
+        <label class="switch">
+          <input type="checkbox" name="darkMode" id="darkMode">
+          <span class="slider round"></span>
+          <div class = "iconMoon">
+            <i class="fa">&#xf186;</i>
+          </div>
+          <div class = "iconSun">
+            <i class="material-icons">&#xe430;</i>
+          </div>
+        </label>
+      </div>
     </header>
     <main class="container">
       <button onclick="callEndpoint('/toggle')" class="button full-width">
