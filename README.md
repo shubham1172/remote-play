@@ -43,7 +43,7 @@ Get the development (unstable) version by heading to [Package workflow](https://
 
 **Important**: Make sure that your media player is an active window.
 
-        Light Theme        |        Dark Theme
+Light Theme                |  Dark Theme
 :-------------------------:|:-------------------------:
 ![Screenshot of webapp](./docs/screenshot_webapp.PNG "Light Mode Screenshot")  |  ![Screenshot of darkmode webapp](./docs/screenshot_darkmode_webapp.PNG "Dark Mode Screenshot")
 
