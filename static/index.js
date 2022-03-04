@@ -94,49 +94,47 @@ document.addEventListener("DOMContentLoaded", event => {
   var darkSwitch = document.querySelector('input[name=darkMode]');
   const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
   const prefersLightScheme = window.matchMedia("(prefers-color-scheme: light)");
+  const _darkModeLocal = localStorage.getItem("darkModeLocal");
 
-  darkSwitch.addEventListener('change', function (event) {
+  darkSwitch.addEventListener('change', function (_event) {
     // toggles darkmode when user taps switch
-    if (localStorage.getItem("darkModelocal") == "dark") {
-      document.documentElement.classList.toggle("dark");
-      localStorage.setItem("darkModelocal", "light");
+    if (localStorage.getItem("darkModeLocal") == "dark") {
+      document.documentElement.classList.toggle("dark", false);
+      document.getElementById("darkMode").checked = false;
+      localStorage.setItem("darkModeLocal", "light");
     }
-    else if(localStorage.getItem("darkModelocal") == "light"){
-      document.documentElement.classList.toggle("dark");
-      localStorage.setItem("darkModelocal", "dark");
+    else if (localStorage.getItem("darkModeLocal") == "light") {
+      document.documentElement.classList.toggle("dark", true);
+      document.getElementById("darkMode").checked = true;
+      localStorage.setItem("darkModeLocal", "dark");
     }
   });
 
-  // checks if switch state, darkmode, and local storage preference matches
-  if (localStorage.getItem("darkModelocal") == "light" && prefersDarkScheme.matches){
-    localStorage.setItem("darkModelocal", "light");
-    document.getElementById("darkMode").checked = false;
+  function configureDisplayTheme() {
+    // if first time, then set theme based on system preference
+    if (_darkModeLocal === null) {
+      if (prefersDarkScheme.matches) {
+        localStorage.setItem("darkModeLocal", "dark");
+        document.documentElement.classList.toggle("dark", true);
+        document.getElementById("darkMode").checked = true;
+      }
+      else if (prefersLightScheme.matches) {
+        localStorage.setItem("darkModeLocal", "light");
+        document.documentElement.classList.toggle("dark", false);
+        document.getElementById("darkMode").checked = false;
+      }
+    }
+    // if local storage has been set, set the theme
+    else {
+      if (_darkModeLocal == "dark") {
+        document.documentElement.classList.toggle("dark", true);
+        document.getElementById("darkMode").checked = true;
+      }
+      else if (_darkModeLocal == "light") {
+        document.documentElement.classList.toggle("dark", false);
+        document.getElementById("darkMode").checked = false;
+      }
+    }
   }
-  else if (localStorage.getItem("darkModelocal") == "dark" && prefersDarkScheme.matches){
-    document.documentElement.classList.toggle("dark");
-    document.getElementById("darkMode").checked = true;
-  }
-  else if (localStorage.getItem("darkModelocal") == "light" && prefersLightScheme.matches) {
-    document.documentElement.classList.add("dark");
-    document.documentElement.classList.toggle("dark");
-    document.getElementById("darkMode").checked = false;
-  }
-  else if (localStorage.getItem("darkModelocal") == "dark" && prefersLightScheme.matches){
-    localStorage.setItem("darkModelocal", "dark");
-    document.documentElement.classList.add("dark");
-    document.getElementById("darkMode").checked = true;
-  }
-
-  // if first time, default to user's system preference
-  else if (prefersDarkScheme.matches) {
-    localStorage.setItem("darkModelocal", "dark");
-    document.documentElement.classList.add("dark");
-    document.getElementById("darkMode").checked = true;
-  }
-  else if(prefersLightScheme) {
-    localStorage.setItem("darkModelocal", "light");
-    document.documentElement.classList.add("dark");
-    document.documentElement.classList.toggle("dark");
-    document.getElementById("darkMode").checked = false;
-  }
+  configureDisplayTheme();
 });
