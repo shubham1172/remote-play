@@ -1,5 +1,6 @@
 const ws = new WebSocket(`ws://${window.location.host}/ws`);
 const start = { x: 0, y: 0 };
+const appThemeLocalKey = "darkModeLocal";
 
 function callEndpoint(endpoint) {
   const xhr = new XMLHttpRequest();
@@ -26,6 +27,29 @@ function touchMove(ev) {
 
   start.x = ev.changedTouches[0].clientX;
   start.y = ev.changedTouches[0].clientY;
+}
+
+function configureDisplayTheme() {
+  const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  // if first time, then set theme based on system preference
+  if (localStorage.getItem(appThemeLocalKey) === null) {
+    if (prefersDarkScheme) {
+      localStorage.setItem(appThemeLocalKey, "dark");
+    }
+    else {
+      localStorage.setItem(appThemeLocalKey, "light");
+    }
+  }
+  // set theme based on local storage
+  if (localStorage.getItem(appThemeLocalKey) == "dark") {
+      document.documentElement.classList.toggle("dark", true);
+      document.getElementById("darkMode").checked = true;
+  }
+  else {
+    document.documentElement.classList.toggle("dark", false);
+    document.getElementById("darkMode").checked = false;
+  }
 }
 
 document.addEventListener("DOMContentLoaded", event => {
@@ -92,49 +116,19 @@ document.addEventListener("DOMContentLoaded", event => {
   });
 
   var darkSwitch = document.querySelector('input[name=darkMode]');
-  const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
-  const prefersLightScheme = window.matchMedia("(prefers-color-scheme: light)");
-  const _darkModeLocal = localStorage.getItem("darkModeLocal");
 
   darkSwitch.addEventListener('change', function (_event) {
     // toggles darkmode when user taps switch
-    if (localStorage.getItem("darkModeLocal") == "dark") {
+    if (localStorage.getItem(appThemeLocalKey) == "dark") {
       document.documentElement.classList.toggle("dark", false);
       document.getElementById("darkMode").checked = false;
-      localStorage.setItem("darkModeLocal", "light");
+      localStorage.setItem(appThemeLocalKey, "light");
     }
-    else if (localStorage.getItem("darkModeLocal") == "light") {
+    else if (localStorage.getItem(appThemeLocalKey) == "light") {
       document.documentElement.classList.toggle("dark", true);
       document.getElementById("darkMode").checked = true;
-      localStorage.setItem("darkModeLocal", "dark");
+      localStorage.setItem(appThemeLocalKey, "dark");
     }
   });
-
-  function configureDisplayTheme() {
-    // if first time, then set theme based on system preference
-    if (_darkModeLocal === null) {
-      if (prefersDarkScheme.matches) {
-        localStorage.setItem("darkModeLocal", "dark");
-        document.documentElement.classList.toggle("dark", true);
-        document.getElementById("darkMode").checked = true;
-      }
-      else if (prefersLightScheme.matches) {
-        localStorage.setItem("darkModeLocal", "light");
-        document.documentElement.classList.toggle("dark", false);
-        document.getElementById("darkMode").checked = false;
-      }
-    }
-    // if local storage has been set, set the theme
-    else {
-      if (_darkModeLocal == "dark") {
-        document.documentElement.classList.toggle("dark", true);
-        document.getElementById("darkMode").checked = true;
-      }
-      else if (_darkModeLocal == "light") {
-        document.documentElement.classList.toggle("dark", false);
-        document.getElementById("darkMode").checked = false;
-      }
-    }
-  }
   configureDisplayTheme();
 });

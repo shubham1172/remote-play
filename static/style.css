@@ -190,7 +190,7 @@ footer a:hover {
 }
 
 input:checked + .slider:before {
-  transform: translateX(26px);
+  transform: translateX(200%);
 }
 
 .slider.round {
@@ -202,22 +202,23 @@ input:checked + .slider:before {
 }
 
 .iconSun {
-  position: relative;
+  visibility: visible;
+  position: absolute;
   display: inline-block;
   font-size:18px;
   color:orange;
   z-index: 2;
-  left: 0px;
-  bottom: -4px;
+  left: 60%;
+  bottom: -2px;
 }
 
 .iconMoon {
-  position: relative;
-  display: inline-block;
-  font-size:22px;
-  color:grey;
-  z-index: 0;
-  bottom: 1px;
+  visibility: hidden;
+}
+
+#switchwrap {
+  width: 75px;
+  height: 30px;
 }
 
 @media (prefers-color-scheme: dark) {}
@@ -414,7 +415,7 @@ input:checked + .slider:before {
 }
 
 .dark input:checked + .slider:before {
-  transform: translateX(29px);
+  transform: translateX(200%);
 }
 
 .dark .slider.round {
@@ -426,22 +427,23 @@ input:checked + .slider:before {
 }
 
 .dark .iconSun {
-  position: relative;
-  display: inline-block;
-  font-size:18px;
-  color:orange;
-  z-index: 0;
-  left: 0px;
-  bottom: -4px;
+  visibility: hidden;
 }
 
 .dark .iconMoon {
-  position: relative;
+  visibility: visible;
+  position: absolute;
   display: inline-block;
   font-size:22px;
   color:grey;
   z-index: 2;
   bottom: 1px;
+  right: 65%;
+}
+
+.dark #switchwrap {
+  width: 75px;
+  height: 30px;
 }
 
 /*# sourceMappingURL=style.css.map */
