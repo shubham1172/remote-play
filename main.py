@@ -47,7 +47,7 @@ async def websocket_endpoint(websocket: WebSocket):
         # Since we're already handling the specific exception above and logging the exception
         # we can suppress pylint W0703 - Catching too general exception Exception (broad-except)
         except Exception as error: # pylint: disable=W0703
-            print(f"ERROR: {error}")
+            print(f"Error: {error}")
             await websocket.close()
             break
 
