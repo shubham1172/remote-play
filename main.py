@@ -102,7 +102,7 @@ def log_startup_message(port_num):
     console.log("Start a browser on your device and")
     console.log("connect using an IP address from below:")
     for ip_addr in get_host_ips():
-        console.log(f"http://{ip_addr}:{port_num}", color='g')
+        console.log(f"https://{ip_addr}:{port_num}", color='g')
     console.log("\n")
 
 
@@ -129,4 +129,4 @@ if __name__ == "__main__":
 
     log_startup_message(port)
 
-    uvicorn.run(app, host=host, port=port)
+    uvicorn.run(app, host=host, port=port, ssl_keyfile="ssl-key.pem", ssl_certfile="ssl-cert.pem")
