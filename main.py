@@ -11,9 +11,12 @@ import uvicorn
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
+from fastapi.middleware.httpsredirect import HTTPSRedirectMiddleware
 import console
 
 app = FastAPI()
+
+app.add_middleware(HTTPSRedirectMiddleware) #redirect HTTP requests to HTTPS
 
 
 @app.websocket("/ws")
