@@ -16,8 +16,6 @@ import console
 
 app = FastAPI()
 
-app.add_middleware(HTTPSRedirectMiddleware) #redirect HTTP requests to HTTPS
-
 
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
@@ -97,7 +95,7 @@ def get_host_ips():
     return ip_list
 
 
-def log_startup_message(port_num):
+def log_startup_message(port_num, is_https_enabled):
     """Log a startup message to the console"""
     console.log("remote-play", color='c', end='')
     console.log(" by ", end='')
@@ -105,7 +103,10 @@ def log_startup_message(port_num):
     console.log("Start a browser on your device and")
     console.log("connect using an IP address from below:")
     for ip_addr in get_host_ips():
-        console.log(f"https://{ip_addr}:{port_num}", color='g')
+        if is_https_enabled:
+            console.log(f"https://{ip_addr}:{port_num}", color='g')
+        else:
+            console.log(f"http://{ip_addr}:{port_num}", color='g')
     console.log("\n")
 
 
@@ -130,6 +131,16 @@ if __name__ == "__main__":
     host = os.environ.get("REMOTE_PLAY_HOST", "0.0.0.0")
     port = os.environ.get("REMOTE_PLAY_PORT", 8000)
 
-    log_startup_message(port)
+    ssl_cert = os.environ.get("ssl_cert", "")
+    ssl_key = os.environ.get("ssl_key", "")
 
-    uvicorn.run(app, host=host, port=port, ssl_keyfile="ssl-key.pem", ssl_certfile="ssl-cert.pem")
+
+    if ssl_cert != "":
+        app.add_middleware(HTTPSRedirectMiddleware) #redirect HTTP requests to HTTPS
+
+        log_startup_message(port, True)
+
+    else:
+        log_startup_message(port, False)
+
+    uvicorn.run(app, host=host, port=port, ssl_keyfile=ssl_key, ssl_certfile=ssl_cert)
