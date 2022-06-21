@@ -131,8 +131,8 @@ if __name__ == "__main__":
     host = os.environ.get("REMOTE_PLAY_HOST", "0.0.0.0")
     port = os.environ.get("REMOTE_PLAY_PORT", 8000)
 
-    ssl_cert = os.environ.get("ssl_cert", "")
-    ssl_key = os.environ.get("ssl_key", "")
+    ssl_cert = os.environ.get("SSL_CERT", "")
+    ssl_key = os.environ.get("SSL_KEY", "")
 
 
     if ssl_cert != "":
