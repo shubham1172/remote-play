@@ -34,7 +34,7 @@ Get the development (unstable) version by heading to [Package workflow](https://
 - Set the environment variables `REMOTE_PLAY_HOST` (default="0.0.0.0") and `REMOTE_PLAY_PORT` (default=8000) to customize the web server's host and port.
 
 If you want to use the app with an https connection, you will need to :
-- Create an SSL certificate for the 0.0.0.0 IP address, for example using [mkcert](https://github.com/FiloSottile/mkcert). You may want to add it to your browser's trusted certificates, or else you will get a security warning each time you visit the url.
+- Optionally, create an SSL certificate for the 0.0.0.0 IP address, for example using [mkcert](https://github.com/FiloSottile/mkcert). You may want to add it to your browser's trusted certificates, or else you will get a security warning each time you visit the url. Alternatively, you can use the ones provided at the root of the folder.
 - Create two environment variables, named SSL_CERT and SSL_KEY, pointing to the certificate and key file respectively. If you do not want to create these environment variables, you can instead indicate the files when launching the app using the --key and --cert command line arguments.
 
 ### Starting up
