@@ -131,16 +131,25 @@ if __name__ == "__main__":
     host = os.environ.get("REMOTE_PLAY_HOST", "0.0.0.0")
     port = os.environ.get("REMOTE_PLAY_PORT", 8000)
 
-    ssl_cert = os.environ.get("SSL_CERT", "")
-    ssl_key = os.environ.get("SSL_KEY", "")
+    SSL_CERT = ""
+    SSL_KEY = ""
 
+    if len(sys.argv) != 1:
+        for i, arg in enumerate(sys.argv):
+            if (arg == "--cert" and (i+1) < (len(sys.argv))):
+                SSL_CERT = sys.argv[i+1]
+            elif (arg == "--key" and (i+1) < (len(sys.argv))):
+                SSL_KEY = sys.argv[i+1]
 
-    if ssl_cert != "":
+    if(SSL_CERT == "" or SSL_KEY == ""):
+        SSL_CERT = os.environ.get("SSL_CERT", "")
+        SSL_KEY = os.environ.get("SSL_KEY", "")
+
+    if SSL_CERT != "" and SSL_KEY != "":
         app.add_middleware(HTTPSRedirectMiddleware) #redirect HTTP requests to HTTPS
-
         log_startup_message(port, True)
+        uvicorn.run(app, host=host, port=port, ssl_keyfile=SSL_KEY, ssl_certfile=SSL_CERT)
 
     else:
         log_startup_message(port, False)
-
-    uvicorn.run(app, host=host, port=port, ssl_keyfile=ssl_key, ssl_certfile=ssl_cert)
+        uvicorn.run(app, host=host, port=port)
