@@ -47,7 +47,7 @@ async def websocket_endpoint(websocket: WebSocket):
             break
         # Since we're already handling the specific exception above and logging the exception
         # we can suppress pylint W0703 - Catching too general exception Exception (broad-except)
-        except Exception as error: # pylint: disable=W0703
+        except Exception as error:  # pylint: disable=W0703
             console.log(f"Error: {error}", color="r")
             await websocket.close()
             break
@@ -103,10 +103,8 @@ def log_startup_message(port_num, is_https_enabled):
     console.log("Start a browser on your device and")
     console.log("connect using an IP address from below:")
     for ip_addr in get_host_ips():
-        if is_https_enabled:
-            console.log(f"https://{ip_addr}:{port_num}", color='g')
-        else:
-            console.log(f"http://{ip_addr}:{port_num}", color='g')
+        protocol = {True: "https", False: "http"}[is_https_enabled]
+        console.log(f"{protocol}://{ip_addr}:{port_num}", color='g')
     console.log("\n")
 
 
@@ -141,15 +139,16 @@ if __name__ == "__main__":
             elif (arg == "--ssl-key" and (i+1) < (len(sys.argv))):
                 SSL_KEY = sys.argv[i+1]
 
-    if(SSL_CERT == "" or SSL_KEY == ""):
+    if (SSL_CERT == "" or SSL_KEY == ""):
         SSL_CERT = os.environ.get("REMOTE_PLAY_SSL_CERT", "")
         SSL_KEY = os.environ.get("REMOTE_PLAY_SSL_KEY", "")
 
     if SSL_CERT != "" and SSL_KEY != "":
-        app.add_middleware(HTTPSRedirectMiddleware) #redirect HTTP requests to HTTPS
-        log_startup_message(port, True)
-        uvicorn.run(app, host=host, port=port, ssl_keyfile=SSL_KEY, ssl_certfile=SSL_CERT)
-
+        # redirect HTTP requests to HTTPS
+        app.add_middleware(HTTPSRedirectMiddleware)
+        log_startup_message(port, is_https_enabled=True)
+        uvicorn.run(app, host=host, port=port,
+                    ssl_keyfile=SSL_KEY, ssl_certfile=SSL_CERT)
     else:
-        log_startup_message(port, False)
+        log_startup_message(port, is_https_enabled=False)
         uvicorn.run(app, host=host, port=port)

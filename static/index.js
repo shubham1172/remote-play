@@ -1,7 +1,7 @@
 if (location.protocol === 'https:') {
-	ws = new WebSocket(`wss://${window.location.host}/ws`);
-}else{
-	ws = new WebSocket(`ws://${window.location.host}/ws`);
+  ws = new WebSocket(`wss://${window.location.host}/ws`);
+} else {
+  ws = new WebSocket(`ws://${window.location.host}/ws`);
 }
 const start = { x: 0, y: 0 };
 const appThemeLocalKey = "darkModeLocal";
@@ -47,8 +47,8 @@ function configureDisplayTheme() {
   }
   // set theme based on local storage
   if (localStorage.getItem(appThemeLocalKey) == "dark") {
-      document.documentElement.classList.toggle("dark", true);
-      document.getElementById("darkMode").checked = true;
+    document.documentElement.classList.toggle("dark", true);
+    document.getElementById("darkMode").checked = true;
   }
   else {
     document.documentElement.classList.toggle("dark", false);
@@ -101,21 +101,21 @@ document.addEventListener("DOMContentLoaded", event => {
 
   vscrollHammer.on("vscroll", ev => {
     // scroll vertically
-    if (ev.direction == 8){ // direction = up
-      ws.send(JSON.stringify({ type: "scrolly", y: "up"}));
+    if (ev.direction == 8) { // direction = up
+      ws.send(JSON.stringify({ type: "scrolly", y: "up" }));
     }
-    if (ev.direction == 16){ // direction = down
-      ws.send(JSON.stringify({ type: "scrolly", y: "down"}));
+    if (ev.direction == 16) { // direction = down
+      ws.send(JSON.stringify({ type: "scrolly", y: "down" }));
     }
   });
 
   hscrollHammer.on("hscroll", ev => {
     // scroll horizontally
-    if (ev.direction == 2){ //direction = left
-      ws.send(JSON.stringify({ type: "scrollx", x: "left"}));
+    if (ev.direction == 2) { //direction = left
+      ws.send(JSON.stringify({ type: "scrollx", x: "left" }));
     }
-    if (ev.direction == 4){ // direction = right
-      ws.send(JSON.stringify({ type: "scrollx", x: "right"}));
+    if (ev.direction == 4) { // direction = right
+      ws.send(JSON.stringify({ type: "scrollx", x: "right" }));
     }
   });
 
