@@ -1,4 +1,8 @@
-const ws = new WebSocket(`ws://${window.location.host}/ws`);
+if (location.protocol === 'https:') {
+	ws = new WebSocket(`wss://${window.location.host}/ws`);
+}else{
+	ws = new WebSocket(`ws://${window.location.host}/ws`);
+}
 const start = { x: 0, y: 0 };
 const appThemeLocalKey = "darkModeLocal";
 
@@ -74,7 +78,7 @@ document.addEventListener("DOMContentLoaded", event => {
     ws.send(JSON.stringify({ type: "tap" }));
   });
   hammer.on("doubletap", ev => {
-    // right mouse button click 
+    // right mouse button click
     ws.send(JSON.stringify({ type: "doubletap" }));
   });
   doubleTap.recognizeWith(singleTap);
@@ -95,7 +99,7 @@ document.addEventListener("DOMContentLoaded", event => {
   vscrollHammer.add(scrolly);
   hscrollHammer.add(scrollx);
 
-  vscrollHammer.on("vscroll", ev => { 
+  vscrollHammer.on("vscroll", ev => {
     // scroll vertically
     if (ev.direction == 8){ // direction = up
       ws.send(JSON.stringify({ type: "scrolly", y: "up"}));

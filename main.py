@@ -11,6 +11,7 @@ import uvicorn
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
+from fastapi.middleware.httpsredirect import HTTPSRedirectMiddleware
 import console
 
 app = FastAPI()
@@ -94,7 +95,7 @@ def get_host_ips():
     return ip_list
 
 
-def log_startup_message(port_num):
+def log_startup_message(port_num, is_https_enabled):
     """Log a startup message to the console"""
     console.log("remote-play", color='c', end='')
     console.log(" by ", end='')
@@ -102,7 +103,10 @@ def log_startup_message(port_num):
     console.log("Start a browser on your device and")
     console.log("connect using an IP address from below:")
     for ip_addr in get_host_ips():
-        console.log(f"http://{ip_addr}:{port_num}", color='g')
+        if is_https_enabled:
+            console.log(f"https://{ip_addr}:{port_num}", color='g')
+        else:
+            console.log(f"http://{ip_addr}:{port_num}", color='g')
     console.log("\n")
 
 
@@ -127,6 +131,25 @@ if __name__ == "__main__":
     host = os.environ.get("REMOTE_PLAY_HOST", "0.0.0.0")
     port = os.environ.get("REMOTE_PLAY_PORT", 8000)
 
-    log_startup_message(port)
+    SSL_CERT = ""
+    SSL_KEY = ""
 
-    uvicorn.run(app, host=host, port=port)
+    if len(sys.argv) != 1:
+        for i, arg in enumerate(sys.argv):
+            if (arg == "--ssl-cert" and (i+1) < (len(sys.argv))):
+                SSL_CERT = sys.argv[i+1]
+            elif (arg == "--ssl-key" and (i+1) < (len(sys.argv))):
+                SSL_KEY = sys.argv[i+1]
+
+    if(SSL_CERT == "" or SSL_KEY == ""):
+        SSL_CERT = os.environ.get("REMOTE_PLAY_SSL_CERT", "")
+        SSL_KEY = os.environ.get("REMOTE_PLAY_SSL_KEY", "")
+
+    if SSL_CERT != "" and SSL_KEY != "":
+        app.add_middleware(HTTPSRedirectMiddleware) #redirect HTTP requests to HTTPS
+        log_startup_message(port, True)
+        uvicorn.run(app, host=host, port=port, ssl_keyfile=SSL_KEY, ssl_certfile=SSL_CERT)
+
+    else:
+        log_startup_message(port, False)
+        uvicorn.run(app, host=host, port=port)

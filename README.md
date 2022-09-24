@@ -33,6 +33,10 @@ Get the development (unstable) version by heading to [Package workflow](https://
 - Extract the zip from the step above and copy to any suitable location
 - Set the environment variables `REMOTE_PLAY_HOST` (default="0.0.0.0") and `REMOTE_PLAY_PORT` (default=8000) to customize the web server's host and port.
 
+If you want to use the app with an https connection, you will need to :
+- Optionally, create an SSL certificate using a tool like [mkcert](https://github.com/FiloSottile/mkcert). You may want to add it to your browser's trusted certificates, or else you will get a security warning each time you visit the url.
+- Create two environment variables, named REMOTE_PLAY_SSL_CERT and REMOTE_PLAY_SSL_KEY, pointing to the certificate and key file respectively. If you do not want to create these environment variables, you can instead indicate the files when launching the app using the --ssl-key and --ssl-cert command line arguments.
+
 ### Starting up
 
 - Open the remote-play folder and start the app: remote-play.exe for Windows, remote-play for Linux/MacOS
