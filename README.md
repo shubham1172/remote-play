@@ -44,7 +44,7 @@ To use a secured connection,
 - Open the remote-play folder and start the app: remote-play.exe for Windows, remote-play for Linux/MacOS
 - Navigate to the correct IP address from the console (depending on your network) on your device.
 
-<img src="./docs/screenshot_terminal.png" width="513" height="193" alt="Screenshot of terminal"/>
+<img src="./docs/screenshot_terminal.png" width="740" height="480" alt="Screenshot of terminal"/>
 
 
 **Important**: Make sure that your media player is an active window.
