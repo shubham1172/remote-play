@@ -136,14 +136,14 @@ if __name__ == "__main__":
 
     if len(sys.argv) != 1:
         for i, arg in enumerate(sys.argv):
-            if (arg == "--cert" and (i+1) < (len(sys.argv))):
+            if (arg == "--ssl-cert" and (i+1) < (len(sys.argv))):
                 SSL_CERT = sys.argv[i+1]
-            elif (arg == "--key" and (i+1) < (len(sys.argv))):
+            elif (arg == "--ssl-key" and (i+1) < (len(sys.argv))):
                 SSL_KEY = sys.argv[i+1]
 
     if(SSL_CERT == "" or SSL_KEY == ""):
-        SSL_CERT = os.environ.get("SSL_CERT", "")
-        SSL_KEY = os.environ.get("SSL_KEY", "")
+        SSL_CERT = os.environ.get("REMOTE_PLAY_SSL_CERT", "")
+        SSL_KEY = os.environ.get("REMOTE_PLAY_SSL_KEY", "")
 
     if SSL_CERT != "" and SSL_KEY != "":
         app.add_middleware(HTTPSRedirectMiddleware) #redirect HTTP requests to HTTPS
