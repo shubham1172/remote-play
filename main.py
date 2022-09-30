@@ -138,6 +138,10 @@ if __name__ == "__main__":
                 SSL_CERT = sys.argv[i+1]
             elif (arg == "--ssl-key" and (i+1) < (len(sys.argv))):
                 SSL_KEY = sys.argv[i+1]
+            elif (arg == "--port" and (i+1) < (len(sys.argv))):
+                port = int(sys.argv[i+1])
+            elif (arg == "--host" and (i+1) < (len(sys.argv))):
+                host = int(sys.argv[i+1])
 
     if (SSL_CERT == "" or SSL_KEY == ""):
         SSL_CERT = os.environ.get("REMOTE_PLAY_SSL_CERT", "")
