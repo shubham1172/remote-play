@@ -95,16 +95,22 @@ def get_host_ips():
     return ip_list
 
 
-def log_startup_message(port_num, is_https_enabled):
+def log_startup_message(port_num, is_https_enabled, host):
     """Log a startup message to the console"""
     console.log("remote-play", color='c', end='')
     console.log(" by ", end='')
     console.log("@shubham1172", color='c', end='\n\n')
     console.log("Start a browser on your device and")
     console.log("connect using an IP address from below:")
-    for ip_addr in get_host_ips():
+    if host == "0.0.0.0":
+        # Log all IP addresses
+        for ip_addr in get_host_ips():
+            protocol = {True: "https", False: "http"}[is_https_enabled]
+            console.log(f"{protocol}://{ip_addr}:{port_num}", color='g')
+    else:
+        # Log only the specified host
         protocol = {True: "https", False: "http"}[is_https_enabled]
-        console.log(f"{protocol}://{ip_addr}:{port_num}", color='g')
+        console.log(f"{protocol}://{host}:{port_num}", color='g')
     console.log("\n")
 
 
@@ -155,9 +161,9 @@ if __name__ == "__main__":
     if SSL_CERT != "" and SSL_KEY != "":
         # redirect HTTP requests to HTTPS
         app.add_middleware(HTTPSRedirectMiddleware)
-        log_startup_message(port, is_https_enabled=True)
+        log_startup_message(port, is_https_enabled=True, host=host)
         uvicorn.run(app, host=host, port=port,
                     ssl_keyfile=SSL_KEY, ssl_certfile=SSL_CERT)
     else:
-        log_startup_message(port, is_https_enabled=False)
+        log_startup_message(port, is_https_enabled=False, host=host)
         uvicorn.run(app, host=host, port=port)
