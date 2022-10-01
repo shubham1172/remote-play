@@ -142,7 +142,8 @@ if __name__ == "__main__":
                 try:
                     port = int(sys.argv[i+1])
                 except ValueError as verr:
-                    console.log(f"Error: invalid --port, {verr}, exiting", color="r")
+                    console.log(
+                        f"Error: invalid --port, {verr}, exiting", color="r")
                     sys.exit(1)
             elif (arg == "--host" and (i+1) < (len(sys.argv))):
                 host = sys.argv[i+1]
