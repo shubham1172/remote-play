@@ -1,5 +1,5 @@
 {
-  "name": "my-webpack-project",
+  "name": "remote-play",
   "devDependencies": {
     "@types/hammerjs": "^2.0.41",
     "@webpack-cli/generators": "^2.5.0",
