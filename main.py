@@ -75,6 +75,8 @@ def handle_command(cmd):
             pyautogui.press("KEYTYPE_SOUND_DOWN")
         else:
             pyautogui.press("volumedown")
+    elif cmd.split('.')[0] == 'KB':
+        pyautogui.press(cmd.split('.')[1])
 
 
 @app.get("/")
