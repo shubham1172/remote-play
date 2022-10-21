@@ -24,5 +24,5 @@
     "hammerjs": "^2.0.8"
   },
   "version": "1.0.0",
-  "description": "My webpack project"
+  "description": "Remote-Play uses pyautogui to press keyboard shortcuts to control your media. It uses fastapi to serve a minimal UI to your mobile device."
 }
