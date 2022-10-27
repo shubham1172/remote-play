@@ -131,3 +131,7 @@ dmypy.json
 # SSL certificate files
 *.pem
 *.key
+
+
+# Node.js
+node_modules/

@@ -23,6 +23,12 @@ git checkout -b your_username/fix_name
 
 Make the changes, test them locally, and them commit. Make sure to comply with the linters.
 
+## Setup the client-side code build
+```
+yarn install
+yarn run build
+```
+
 ## Starting development server
 
 ```

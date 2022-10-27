@@ -7,60 +7,50 @@
       name="viewport"
       content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
     />
-    <link rel="stylesheet" href="/static/style.css" />
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"
       integrity="sha512-UXumZrZNiOwnTcZSHLOfcTs0aos2MzBWHXOHOuB0J/R44QB0dwY5JgfbvljXcklVf65Gc4El6RjZ+lnwd2az2g=="
       crossorigin="anonymous"
     ></script>
-    <script type="text/javascript" src="/static/index.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="module" src="/dist/index.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
   </head>
 
   <body>
     <header>
       <h1 class="title">Remote Play</h1>
-      <div id ="switchwrap">
+      <div id="switchwrap">
         <label class="switch">
-          <input type="checkbox" name="darkMode" id="darkMode">
+          <input type="checkbox" name="darkMode" id="darkMode" />
           <span class="slider round"></span>
-          <div class = "iconMoon">
+          <div class="iconMoon">
             <i class="fa">&#xf186;</i>
           </div>
-          <div class = "iconSun">
+          <div class="iconSun">
             <i class="material-icons">&#xe430;</i>
           </div>
         </label>
       </div>
     </header>
     <main class="container">
-      <button onclick="callEndpoint('/toggle')" class="button full-width">
-        Play/Pause
-      </button>
-      <button onclick="callEndpoint('/mute')" class="button full-width">
-        Mute
-      </button>
-      <button onclick="callEndpoint('/volume_down')" class="button volume_down">
-        Volume -
-      </button>
-      <button onclick="callEndpoint('/volume_up')" class="button volume_up">
-        Volume +
-      </button>
-      <button onclick="callEndpoint('/seek_left')" class="button back">
-        &lt;&lt;
-      </button>
-      <button onclick="callEndpoint('/seek_right')" class="button forward">
-        &gt;&gt;
-      </button>
-      <div id ="wrapper">
-          <div class="touchpad" id="touchpad">
-          </div>
-          <div class="vscrollpad" id="vscrollpad">
-          </div>
+      <button name="toggle" class="button full-width">Play/Pause</button>
+      <button name="mute" class="button full-width">Mute</button>
+      <button name="volume_down" class="button volume_down">Volume -</button>
+      <button name="volume_up" class="button volume_up">Volume +</button>
+      <button name="seek_left" class="button back">&lt;&lt;</button>
+      <button name="seek_right" class="button forward">&gt;&gt;</button>
+      <div id="wrapper">
+        <div class="touchpad" id="touchpad"></div>
+        <div class="vscrollpad" id="vscrollpad"></div>
       </div>
-      <div class="hscrollpad" id="hscrollpad">
-      </div>
+      <div class="hscrollpad" id="hscrollpad"></div>
     </main>
     <footer class="footer">
       <p>
