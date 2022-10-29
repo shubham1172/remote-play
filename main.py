@@ -193,5 +193,4 @@ if __name__ == "__main__":
                     ssl_keyfile=SSL_KEY, ssl_certfile=SSL_CERT)
     else:
         log_startup_message(port, is_https_enabled=False, hostname=host)
-        uvicorn.run(app, host=host, port=port)
-Cancel
+
