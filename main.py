@@ -5,12 +5,15 @@ and translate them to mouse and keyboard actions using pyautogui.
 
 import os
 import sys
+import json
+from typing import Union
 import netifaces
 import pyautogui
 import uvicorn
-from fastapi import FastAPI, WebSocket, WebSocketDisconnect
+from fastapi import Header, FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, JSONResponse
+from fastapi.encoders import jsonable_encoder
 from fastapi.middleware.httpsredirect import HTTPSRedirectMiddleware
 import console
 
@@ -51,6 +54,30 @@ async def websocket_endpoint(websocket: WebSocket):
             console.log(f"Error: {error}", color="r")
             await websocket.close()
             break
+
+
+@app.get("/metadata")
+def return_features(user_agent: Union[str, None] = Header(default=None)):
+    """Handle metadata for OS compatilibity"""
+    if "windows" in user_agent.lower():
+        json_str =  '{ "OS": "Windows", "experimental-features": { "hscroll": false } }'
+        json_res=jsonable_encoder(json_str)
+        json_dict = json.loads(json_res)
+        return JSONResponse( content=json_dict )
+    if "linux" in user_agent.lower():
+        json_str = '{ "OS": "Linux", "experimental-features": { } }'
+        json_res=jsonable_encoder(json_str)
+        json_dict = json.loads(json_res)
+        return JSONResponse( content=json_dict )
+    if "apple" in user_agent.lower():
+        json_str = '{ "OS": "Apple", "experimental-features": { } }'
+        json_res=jsonable_encoder(json_str)
+        json_dict = json.loads(json_res)
+        return JSONResponse( content=json_dict )
+    json_str = '{ }'
+    json_res=jsonable_encoder(json_str)
+    json_dict = json.loads(json_res)
+    return JSONResponse( content=json_dict )
 
 
 @app.get("/{cmd}")
@@ -95,14 +122,14 @@ def get_host_ips():
     return ip_list
 
 
-def log_startup_message(port_num, is_https_enabled, host):
+def log_startup_message(port_num, is_https_enabled, hostname):
     """Log a startup message to the console"""
     console.log("remote-play", color='c', end='')
     console.log(" by ", end='')
     console.log("@shubham1172", color='c', end='\n\n')
     console.log("Start a browser on your device and")
     console.log("connect using an IP address from below:")
-    if host == "0.0.0.0":
+    if hostname == "0.0.0.0":
         # Log all IP addresses
         for ip_addr in get_host_ips():
             protocol = {True: "https", False: "http"}[is_https_enabled]
@@ -110,7 +137,7 @@ def log_startup_message(port_num, is_https_enabled, host):
     else:
         # Log only the specified host
         protocol = {True: "https", False: "http"}[is_https_enabled]
-        console.log(f"{protocol}://{host}:{port_num}", color='g')
+        console.log(f"{protocol}://{hostname}:{port_num}", color='g')
     console.log("\n")
 
 
@@ -161,9 +188,9 @@ if __name__ == "__main__":
     if SSL_CERT != "" and SSL_KEY != "":
         # redirect HTTP requests to HTTPS
         app.add_middleware(HTTPSRedirectMiddleware)
-        log_startup_message(port, is_https_enabled=True, host=host)
+        log_startup_message(port, is_https_enabled=True, hostname=host)
         uvicorn.run(app, host=host, port=port,
                     ssl_keyfile=SSL_KEY, ssl_certfile=SSL_CERT)
     else:
-        log_startup_message(port, is_https_enabled=False, host=host)
+        log_startup_message(port, is_https_enabled=False, hostname=host)
         uvicorn.run(app, host=host, port=port)
