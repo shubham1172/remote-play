@@ -59,21 +59,22 @@ async def websocket_endpoint(websocket: WebSocket):
 @app.get("/metadata")
 def metadata():
     """Handle metadata for OS compatilibity"""
-    if "windows" in user_agent.lower():
-        json_str =  '{ "OS": "Windows", "experimental-features": { "hscroll": false } }'
-        json_res=jsonable_encoder(json_str)
-        json_dict = json.loads(json_res)
-        return JSONResponse( content=json_dict )
-    if "linux" in user_agent.lower():
+    platform = sys.
+    if sys.platform.startswith('linux'):
         json_str = '{ "OS": "Linux", "experimental-features": { } }'
         json_res=jsonable_encoder(json_str)
         json_dict = json.loads(json_res)
         return JSONResponse( content=json_dict )
-    if "apple" in user_agent.lower():
+    elif sys.platform.startswith('darwin'):
         json_str = '{ "OS": "Apple", "experimental-features": { } }'
         json_res=jsonable_encoder(json_str)
         json_dict = json.loads(json_res)
         return JSONResponse( content=json_dict )
+    elif sys.platform.startswith('win32'):
+        json_str =  '{ "OS": "Windows", "experimental-features": { "hscroll": false } }'
+        json_res=jsonable_encoder(json_str)
+        json_dict = json.loads(json_res)
+        return JSONResponse( content=json_dict ) 
     json_str = '{ }'
     json_res=jsonable_encoder(json_str)
     json_dict = json.loads(json_res)
