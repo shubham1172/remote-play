@@ -57,7 +57,7 @@ async def websocket_endpoint(websocket: WebSocket):
 
 
 @app.get("/metadata")
-def return_features(user_agent: Union[str, None] = Header(default=None)):
+def metadata():
     """Handle metadata for OS compatilibity"""
     if "windows" in user_agent.lower():
         json_str =  '{ "OS": "Windows", "experimental-features": { "hscroll": false } }'
