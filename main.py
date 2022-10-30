@@ -59,7 +59,6 @@ async def websocket_endpoint(websocket: WebSocket):
 @app.get("/metadata")
 def metadata():
     """Handle metadata for OS compatilibity"""
-    platform = sys.
     if sys.platform.startswith('linux'):
         json_str = '{ "OS": "Linux", "experimental-features": { } }'
         json_res=jsonable_encoder(json_str)
