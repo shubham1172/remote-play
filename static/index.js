@@ -11,14 +11,6 @@ const expFeatures = [{
 
 
 
-function map_actions(el){
-    if(['touchpad', 'vscrollpad', 'hscrollpad'].includes(el)){
-            return el.substring(0, el.length - 3);
-    }
-    else{
-        return el;
-    }
-}
 
 
 function getMetadata() {
