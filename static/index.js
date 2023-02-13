@@ -9,10 +9,6 @@ const expFeatures = [{
     'hscroll': 'hscrollpad'
 }]
 
-
-
-
-
 function getMetadata() {
   let result = {}
   const xhr = new XMLHttpRequest();
