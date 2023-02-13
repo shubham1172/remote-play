@@ -5,6 +5,9 @@ if (location.protocol === 'https:') {
 }
 const start = { x: 0, y: 0 };
 const appThemeLocalKey = "darkModeLocal";
+const expFeatures = [{
+    'hscroll': 'hscrollpad'
+}]
 
 
 
@@ -21,21 +24,23 @@ function map_actions(el){
 function getMetadata() {
   let result = {}
   const xhr = new XMLHttpRequest();
+
   xhr.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            result = JSON.parse(this.responseText);
-            let actions = ['toggle', 'mute', 'volume_down', 'volume_up', 'seek_left',
-                'seek_right', 'touchpad', 'vscrollpad', 'hscrollpad'];
+            let result = JSON.parse(this.responseText);
+            let result_features = result["experimental-features"];
+            for (var feat of expFeatures) {
+                var [key, value] = Object.entries(feat)[0]
+                if(Object.keys(result_features).includes(key) &&
+                    result_features[key] == false){
+                    document.getElementById(value).style.display = 'none';
+                    if (key == 'hscroll'){
+                        document.getElementById("vscrollpad").classList.add("bottom");
+                        document.getElementById("touchpad").classList.add("bottom");}
+                    }
 
-            let cleanActions = actions.map(map_actions)
-            for(var i=0; i<actions.length; i++) {
-                if (result["experimental-features"][cleanActions[i]] == false){
-                    document.getElementById(actions[i]).style.display = 'none';
-                    //only if hscroll is hidden - might not be worth trying to generalise?
-                    document.getElementById("vscrollpad").classList.add("bottom");
-                    document.getElementById("touchpad").classList.add("bottom");
-                }
             }
+
        }
     };
   xhr.open("get", "/metadata", true);
