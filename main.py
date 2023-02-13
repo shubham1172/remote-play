@@ -6,6 +6,7 @@ and translate them to mouse and keyboard actions using pyautogui.
 import os
 import sys
 import netifaces
+import platform
 import pyautogui
 import uvicorn
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
@@ -15,6 +16,18 @@ from fastapi.middleware.httpsredirect import HTTPSRedirectMiddleware
 import console
 
 app = FastAPI()
+
+
+@app.get('/metadata')
+def get_metadata():
+    """Returns the metadata from server"""
+    os_system = platform.system()
+    return {
+            "OS": os_system,
+            "experimental-features": {
+                "hscroll": False if os_system == 'Windows' else True
+            }
+        }
 
 
 @app.websocket("/ws")

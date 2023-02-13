@@ -111,6 +111,10 @@ footer a:hover {
   display: flex;
 }
 
+.touchpad.bottom {
+    border-bottom-left-radius: 10px;
+}
+
 .vscrollpad {
   background-color: silver;
   margin-right: auto;
@@ -121,6 +125,10 @@ footer a:hover {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+
+.vscrollpad.bottom {
+    border-bottom-right-radius: 10px;
 }
 
 .hscrollpad {
@@ -335,6 +343,10 @@ input:checked + .slider:before {
   display: flex;
 }
 
+.dark .touchpad.bottom {
+    border-bottom-left-radius: 10px;
+}
+
 .dark .vscrollpad {
   background-color: #363636;
   margin-right: auto;
@@ -345,6 +357,10 @@ input:checked + .slider:before {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+
+.dark .vscrollpad .bottom {
+    border-bottom-right-radius: 10px;
 }
 
 .dark .hscrollpad {

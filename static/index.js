@@ -5,6 +5,35 @@ if (location.protocol === 'https:') {
 }
 const start = { x: 0, y: 0 };
 const appThemeLocalKey = "darkModeLocal";
+const expFeatures = [{
+    'hscroll': 'hscrollpad'
+}]
+
+function getMetadata() {
+  let result = {}
+  const xhr = new XMLHttpRequest();
+
+  xhr.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            let result = JSON.parse(this.responseText);
+            let result_features = result["experimental-features"];
+            for (var feat of expFeatures) {
+                var [key, value] = Object.entries(feat)[0]
+                if(Object.keys(result_features).includes(key) &&
+                    result_features[key] == false){
+                    document.getElementById(value).style.display = 'none';
+                    if (key == 'hscroll'){
+                        document.getElementById("vscrollpad").classList.add("bottom");
+                        document.getElementById("touchpad").classList.add("bottom");}
+                    }
+
+            }
+
+       }
+    };
+  xhr.open("get", "/metadata", true);
+  xhr.send();
+}
 
 function callEndpoint(endpoint) {
   const xhr = new XMLHttpRequest();
@@ -135,4 +164,5 @@ document.addEventListener("DOMContentLoaded", event => {
     }
   });
   configureDisplayTheme();
+  getMetadata();
 });
