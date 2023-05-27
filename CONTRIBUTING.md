@@ -35,4 +35,4 @@ python main.py
 2. Click on the `Watch Sass` button in the lower right of your code editor while in the project directory.
 3. The `.scss` file will compile into `.css` while the compiler is watching for any file changes.
 
-**To learn more about Sass, [click here](https://sass-lang.com/)**
+**To learn more about Sass, [click here](https://sass-lang.com/guide)**
