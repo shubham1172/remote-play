@@ -155,10 +155,13 @@ footer a:hover {
   -webkit-transition: 0.25s ease-in-out;
   transition: 0.25s ease-in-out;
 }
-
-.button:active {
+.button:hover {
   color: #1d33b1;
   background-color: #b2bee2;
+}
+.button:active {
+  color: #eff8ff;
+  background-color: #1d33b1;
 }
 
 .switch {
@@ -380,7 +383,7 @@ input:checked + .slider:before {
 
 .dark .button {
   border-radius: 10px;
-  border: 2px solid #242424;
+  border: 2px solid #251a1a;
   font-size: large;
   color: #e4e4e4;
   background-color: #363636;
@@ -388,7 +391,10 @@ input:checked + .slider:before {
   -webkit-transition: 0.25s ease-in-out;
   transition: 0.25s ease-in-out;
 }
-
+.dark .button:hover {
+  color: #5a5a5a;
+  background-color: #908888;
+}
 .dark .button:active {
   color: #908888;
   background-color: #5a5a5a;
