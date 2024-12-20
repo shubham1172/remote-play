@@ -16,7 +16,9 @@ The following actions are supported:
 - Right-mouse-button click using double tap
 - Swipe up and down to scroll vertically on the right pad
 
-**Disclaimer**: Horizontal scrolling only supported on OS X / Linux Platforms
+> [!IMPORTANT]
+> Horizontal scrolling only supported on OS X / Linux Platforms
+
 
 - Swipe left and right to scroll horizontally on the bottom pad
 
