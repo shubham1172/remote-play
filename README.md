@@ -16,17 +16,20 @@ The following actions are supported:
 - Right-mouse-button click using double tap
 - Swipe up and down to scroll vertically on the right pad
 
-**Disclaimer**: Horizontal scrolling only supported on OS X / Linux Platforms
+> [!IMPORTANT]
+> Horizontal scrolling only supported on OS X / Linux Platforms
+
 
 - Swipe left and right to scroll horizontally on the bottom pad
 
 ## Using Remote-Play
 
 ### Download the latest version
+You can either get the stable version or the development version;
 
 Get the latest stable version by heading to [Releases](https://github.com/shubham1172/remote-play/releases) and download the right release depending on your OS.
 
-or
+Or:
 
 Get the development (unstable) version by heading to [Package workflow](https://github.com/shubham1172/remote-play/actions/workflows/package.yml). Click on the latest run and scroll down to find the `artifacts` associated and download the right one for your OS.
 
